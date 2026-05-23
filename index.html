@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YDP | رواد التطوير</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="light-theme">
+
+    <div class="top-news-bar"><div class="ticker-text">كيان رواد التطوير والتنمية الشبابية (YDP) - وزارة الشباب والرياضة</div></div>
+
+    <div id="login-overlay" class="overlay">
+        <div class="login-card">
+            <img src="https://i.postimg.cc/rp580Zh2/Whats-App-Image-2026-02-27-at-4-43-50-PM.jpg" class="main-logo">
+            <h2>بوابة رواد التطوير</h2>
+            <div id="main-options" class="options-grid">
+                <button onclick="guestAccess()"><i class="fas fa-eye"></i> دخول الزوار</button>
+                <button onclick="showAccessInput()"><i class="fas fa-map-marker-alt"></i> المحافظات</button>
+                <button onclick="showAccessInput()"><i class="fas fa-users"></i> اللجان المركزية</button>
+                <button onclick="showAccessInput()" class="btn-exec"><i class="fas fa-user-shield"></i> المكتب التنفيذي</button>
+            </div>
+            <div id="code-input-area" style="display:none;">
+                <input type="password" id="access-code" placeholder="أدخل كود الدخول السري">
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button onclick="checkAccess()" style="background: var(--blue); color: white;">دخول</button>
+                    <button onclick="backToMain()" style="background: var(--red-ministry); color: white;">رجوع</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <div class="nav-container">
+            <div class="logo-area">
+                <img src="https://i.postimg.cc/rp580Zh2/Whats-App-Image-2026-02-27-at-4-43-50-PM.jpg">
+                <div class="brand-name"><h2>رواد التطوير</h2><span>وزارة الشباب والرياضة</span></div>
+            </div>
+            <nav>
+                <a href="#about-section">القيادة</a>
+                <a href="#workspace-section">بوابة الـ ID</a>
+                <a href="#interview-section" id="nav-interview" style="display:none;">المقابلات</a>
+                <a href="#activities-section">الأنشطة</a>
+                <a href="#news-section">الأخبار</a>
+                <button onclick="logout()" class="logout-btn">خروج</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="interview-section" class="section" style="display:none; background: #fff;">
+            <h2 class="section-title">نظام المقابلات الموحد وأدلة القيادة (YDP)</h2>
+            <div class="login-card" style="max-width: 600px; margin: 0 auto; text-align: right; border: 1px solid var(--gold); background: white; padding: 25px; border-radius: 15px; border-bottom: 6px solid var(--gold);">
+                
+                <div id="interview-main-menu">
+                    <h4 style="margin-bottom: 12px; color: var(--blue); font-weight: bold;"><i class="fas fa-file-signature"></i> لجان المتقدمين الجدد:</h4>
+                    <div class="options-grid" style="margin-bottom: 25px;">
+                        <button onclick="startInterview('IT')" style="background: var(--blue); color: white;">لجنة IT</button>
+                        <button onclick="startInterview('HR')">لجنة HR</button>
+                        <button onclick="startInterview('PR')">لجنة PR</button>
+                        <button onclick="startInterview('Media')">لجنة ميديا</button>
+                        <button onclick="startInterview('OR')">لجنة تنظيم</button>
+                        <button onclick="startInterview('PI')">لجنة مشروعات</button>
+                    </div>
+
+                    <h4 style="margin-bottom: 12px; color: var(--gold); font-weight: bold;"><i class="fas fa-crown"></i> أدلة مقابلات الإدارة والقيادة:</h4>
+                    <div class="options-grid">
+                        <button onclick="startInterview('Coordinators')" style="background: var(--gold); color: white;">أسئلة المنسقين</button>
+                        <button onclick="startInterview('Heads')" style="background: var(--blue); color: white;">أسئلة الهيدات (Heads)</button>
+                    </div>
+                </div>
+
+                <div id="interview-form-area" style="display:none;">
+                    <button onclick="backToInterviewMenu()" style="background:none; color:var(--red-ministry); border:none; cursor:pointer; font-weight:bold; margin-bottom:15px; font-family:'Cairo'; font-size:1rem;"> < رجوع للقائمة الرئيسية</button>
+                    <h3 id="current-comm-title" style="color:var(--gold); margin-bottom:15px; font-weight:900;"></h3>
+                    
+                    <input type="text" id="cand-name" placeholder="اسم المتقدم الثلاثي بالكامل" style="width:100%; padding:12px; margin-bottom:15px; border-radius:8px; border:1px solid #ccc; font-family: 'Cairo'; font-size:1rem;">
+                    
+                    <div id="questions-container" style="background: #f4f7f9; padding: 15px; border-radius: 12px; margin-bottom: 15px;"></div>
+
+                    <textarea id="cand-notes" placeholder="ملاحظات الإنترفيو والسلوك (لباقة، التزام، مظهر...)" style="width:100%; height:90px; padding:12px; margin-bottom:15px; border-radius:8px; border:1px solid #ccc; font-family: 'Cairo'; font-size:1rem;"></textarea>
+                    
+                    <button onclick="submitInterviewData()" class="btn-exec" style="width:100%; padding:15px; background: var(--blue); color:white; border:none; border-radius:12px; cursor:pointer; font-family: 'Cairo'; font-weight: bold; font-size:1.1rem;">رصد النتيجة وحفظ الاستمارة</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="workspace-section" class="section" style="display:none; background: #f9f9f9; border-bottom: 2px solid #b8860b;">
+            <h2 id="ws-title" class="section-title">بوابة الأعضاء</h2>
+            <div id="members-grid" class="cards-grid" style="display: block;"></div>
+        </section>
+
+        <section id="about-section" class="executive-structure section">
+            <h2 class="section-title">قيادة الكيان</h2>
+            <div class="leader-card">
+                <div class="badge">رئيس الكيان</div>
+                <img src="https://i.postimg.cc/rp580Zh2/Whats-App-Image-2026-02-27-at-4-43-50-PM.jpg">
+                <h3>أ/ محمد حازم</h3>
+            </div>
+            <div class="exec-grid">
+                <div class="exec-card"><h4>أ/ يوسف عبد التواب</h4><span>نائب رئيس الكيان</span></div>
+                <div class="exec-card"><h4>أ/ سلمي ياسر</h4><span>المدير التنفيذي</span></div>
+                <div class="exec-card"><h4>أ/ هنا اشرف</h4><span>مساعد المدير (مركزي)</span></div>
+                <div class="exec-card"><h4>أ/ ندي هشام</h4><span>مساعد المدير (محافظات)</span></div>
+            </div>
+        </section>
+
+        <section id="activities-section" class="section">
+            <h2 class="section-title">الأنشطة والفعاليات</h2>
+            <div id="admin-activity-controls" style="display:none; max-width:500px; margin:0 auto 20px;">
+                <textarea id="activity-text" placeholder="وصف النشاط..." style="width:100%; padding:10px; border-radius:8px; font-family:'Cairo'; margin-bottom:10px;"></textarea>
+                <input type="file" id="activity-images" style="margin-bottom:10px;">
+                <button onclick="postActivity()" style="padding:10px 20px; background:var(--blue); color:white; border:none; border-radius:5px; cursor:pointer;">نشر النشاط</button>
+            </div>
+            <div id="activities-container"></div>
+        </section>
+
+        <section id="news-section" class="section">
+            <h2 class="section-title">آخر الأخبار</h2>
+            <div id="admin-controls" style="display:none; max-width:500px; margin:0 auto 20px;">
+                <input type="text" id="news-input" placeholder="اكتب خبراً جديداً..." style="width:100%; padding:10px; border-radius:8px; font-family:'Cairo'; margin-bottom:10px;">
+                <button onclick="postNews()" style="padding:10px 20px; background:var(--blue); color:white; border:none; border-radius:5px; cursor:pointer;">نشر الخبر</button>
+            </div>
+            <div id="news-list"></div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">لجان الكيان</h2>
+            <div id="committees-grid" class="cards-grid"></div>
+        </section>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
