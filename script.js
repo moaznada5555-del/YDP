@@ -46,7 +46,7 @@ const committeeQuestions = {
     "Heads": [
         "إذا حدث خلاف حاد بين منسقين داخل لجنتك، كيف تديره وتحله؟",
         "كيف تضع خطة استراتيجية مرنة لإدارة اللجنة طوال الموسم الجديد؟",
-        "كيف تضمن ولاء واستمرارية الأعضاء والمنسقين داخل لجنتك ومنع تسربهم؟",
+        "كيف تضمن ولاء واستمرارية الأعضاء والمنسقين داخل لجنتك ومنع تسربهم？",
         "ما هو التصرف الأمثل إذا كُلفت لجنتك بمهمة طارئة وضخمة قبل الفعالية بـ 24 ساعة؟"
     ]
 };
@@ -64,6 +64,16 @@ let currentWorkspacePage = 1;
 const itemsPerPage = 3; 
 let totalWorkspaceItems = []; 
 
+// ربط الزر العريض والخاص بسحابة جوجل درايف لايف من واجهة النيون
+document.addEventListener("DOMContentLoaded", function() {
+    const driveBtn = document.getElementById("drive-zone");
+    if(driveBtn) {
+        driveBtn.addEventListener("click", function() {
+            window.open(generalDrive, "_blank");
+        });
+    }
+});
+
 // --- وظائف التحكم بالدخول والدوال المصلحة ---
 function guestAccess() { 
     document.getElementById('login-overlay').style.display = 'none'; 
@@ -77,7 +87,7 @@ function showAccessInput(type) {
 }
 
 function backToMain() { 
-    document.getElementById('main-options').style.display = 'grid'; 
+    document.getElementById('main-options').style.display = 'block'; 
     document.getElementById('code-input-area').style.display = 'none'; 
 }
 
@@ -132,10 +142,10 @@ function startInterview(comm) {
     
     container.innerHTML = questions.map((q, i) => `
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid #eee; padding-bottom:6px;">
-            <span style="font-size:0.95rem; flex:1; text-align:right; font-weight:bold; color:#444;">${i+1}. ${q}</span>
+            <span style="font-size:0.95rem; flex:1; text-align:right; font-weight:bold; color:#e2e8f0;">${i+1}. ${q}</span>
             <div style="display:flex; gap:12px;">
-                <label style="cursor:pointer; font-weight:bold; color:green;"><input type="radio" name="q${i}" value="1"> صح</label>
-                <label style="cursor:pointer; font-weight:bold; color:red;"><input type="radio" name="q${i}" value="0"> خطأ</label>
+                <label style="cursor:pointer; font-weight:bold; color:#22c55e;"><input type="radio" name="q${i}" value="1"> صح</label>
+                <label style="cursor:pointer; font-weight:bold; color:#ef4444;"><input type="radio" name="q${i}" value="0"> خطأ</label>
             </div>
         </div>
     `).join('');
@@ -191,7 +201,7 @@ async function fetchInterviewSheetData() {
         renderInterviewTable(cachedInterviewData);
     } catch (err) {
         console.error(err);
-        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--red-ministry); padding: 15px; font-weight: bold;">⚠️ تنبيه: نظام عرض البيانات يعتمد على تفعيل دالة doGet(e) داخل الـ Apps Script لإرجاع كود JSON التفاعلي.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--gold-light); padding: 15px; font-weight: bold;">⚠️ تنبيه: نظام عرض البيانات يعتمد على ربط دالة doGet(e) داخل الـ Apps Script لإرجاع كود JSON التفاعلي.</td></tr>`;
     }
 }
 
@@ -199,20 +209,21 @@ function renderInterviewTable(records) {
     const tbody = document.getElementById('interview-results-tbody');
     if(!tbody) return;
     if(records.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 20px; color: #777;">لا توجد أي سجلات مطابقة لعملية البحث والفلترة.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 20px; color: #64748b;">لا توجد سجلات مطابقة للبحث.</td></tr>`;
         return;
     }
     tbody.innerHTML = records.map(r => {
-        const isAccepted = (r.status || r.الحالة || '') === "مقبول";
-        const badgeColor = isAccepted ? "background: #e6f4ea; color: #137333; padding: 4px 10px; border-radius: 20px; font-weight: bold;" : "background: #fce8e6; color: #c5221f; padding: 4px 10px; border-radius: 20px; font-weight: bold;";
+        const statusText = r.status || r.الحالة || '---';
+        let badgeClass = 'status-badge pending';
+        if (statusText === 'مقبول') badgeClass = 'status-badge accepted';
+        if (statusText === 'مرفوض') badgeClass = 'status-badge rejected';
+
         return `
-            <tr style="border-bottom: 1px solid #eee;">
-                <td style="padding: 12px; font-weight: 700; color: #333;">${r.name || r.الاسم || '---'}</td>
-                <td style="padding: 12px;"><span style="background:#eee; padding:2px 8px; border-radius:5px;">${r.committee || r.اللجنة || '---'}</span></td>
-                <td style="padding: 12px; font-size:0.85rem; color:#666;">${r.gov || r.المحافظة || '---'}</td>
-                <td style="padding: 12px; font-weight: bold; color: var(--blue);">${r.score || r.النتيجة || '0'}%</td>
-                <td style="padding: 12px;"><span style="${badgeColor}">${r.status || r.الحالة || '---'}</span></td>
-                <td style="padding: 12px; font-size: 0.85rem; color: #555; max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${r.notes || r.الملاحظات || ''}">${r.notes || r.الملاحظات || 'لا يوجد'}</td>
+            <tr>
+                <td style="padding: 12px; font-weight: 700; color: #fff;">${r.name || r.الاسم || '---'}</td>
+                <td style="padding: 12px; color: #8a99ad;">${r.committee || r.اللجنة || '---'}</td>
+                <td style="padding: 12px; font-weight: bold; color: var(--gold-light);">${r.score || r.النتيجة || '0'}%</td>
+                <td style="padding: 12px;"><span class="${badgeClass}">${statusText}</span></td>
             </tr>
         `;
     }).join('');
@@ -221,7 +232,7 @@ function renderInterviewTable(records) {
 function filterInterviewTable() {
     const searchVal = document.getElementById('search-cand-name').value.toLowerCase().trim();
     const commVal = document.getElementById('filter-comm').value;
-    const statusVal = document.getElementById('filter-status').value;
+    const statusVal = document.getElementById('filter-status') ? document.getElementById('filter-status').value : "";
 
     const filtered = cachedInterviewData.filter(r => {
         const name = (r.name || r.الاسم || '').toLowerCase();
@@ -250,15 +261,11 @@ async function fetchAndRenderWorkspaceCards() {
     const grid = document.getElementById('members-grid');
     
     let baseHTML = `
-    <div style="grid-column: 1 / -1; width: 100%;">
-        <div style="text-align: center; margin-bottom: 30px;">
-            <a href="${generalDrive}" target="_blank" class="btn-drive"><i class="fas fa-folder-open"></i> الدخول إلى ملفات سحابة الدرايف الموحدة</a>
-        </div>
-        
-        <div style="background: white; padding: 30px; border-radius: 24px; border: 2px dashed var(--gold); color: #333; margin-top: 20px; box-shadow: var(--card-shadow);" class="id-form-container">
-            <h3 style="text-align: center; color: var(--blue); margin-bottom: 25px; font-weight:900;"><i class="fas fa-fingerprint"></i> إصدار وتوثيق بطاقة العضوية الذكية (ID)</h3>
+    <div style="width: 100%; margin-top: 10px;">
+        <div style="background: rgba(13, 22, 33, 0.4); padding: 25px; border-radius: 20px; border: 1px dashed rgba(212, 175, 55, 0.3); color: #fff;" class="id-form-container">
+            <h3 style="text-align: center; color: var(--gold-light); margin-bottom: 20px; font-weight:900;"><i class="fas fa-fingerprint"></i> إصدار بطاقة العضوية الذكية (ID)</h3>
             
-            <div style="display: grid; grid-template-columns: 1fr; gap: 12px; max-width: 420px; margin: 0 auto 30px auto;">
+            <div style="display: grid; grid-template-columns: 1fr; gap: 12px; max-width: 420px; margin: 0 auto 25px auto;">
                 <input type="text" id="input-name" placeholder="الاسم الثلاثي بالكامل" oninput="updateIDCard()">
                 <input type="text" id="input-national" maxlength="14" placeholder="الرقم القومي (14 رقم)" oninput="updateIDCard()">
                 <input type="text" id="input-gov" placeholder="المحافظة" oninput="updateIDCard()">
@@ -266,54 +273,54 @@ async function fetchAndRenderWorkspaceCards() {
                 <input type="text" id="input-comm" placeholder="اللجنة التابع لها" oninput="updateIDCard()">
                 
                 <div style="text-align:right; margin:5px 0;">
-                    <label style="font-size:0.85rem; color:#555; font-weight:bold; display:block; margin-bottom:5px;">الصورة الشخصية الرسمية للعضو:</label>
-                    <input type="file" accept="image/*" onchange="previewImage(event)" style="width:100%;">
+                    <label style="font-size:0.85rem; color:#8a99ad; font-weight:bold; display:block; margin-bottom:5px;">الصورة الشخصية الرسمية للعضو:</label>
+                    <input type="file" accept="image/*" onchange="previewImage(event)" style="width:100%; color: white;">
                 </div>
                 
-                <button onclick="checkAndVerifyID()" class="btn-verify-id" style="background: var(--blue); color: white; padding: 12px; border:none; border-radius:8px; font-weight:bold; cursor:pointer; width:100; margin-top:10px;">
+                <button onclick="checkAndVerifyID()" class="btn-verify-id">
                     <i class="fas fa-check-circle"></i> فحص وتوثيق الكارنيه بالسيستم
                 </button>
                 
                 <div style="display: flex; gap: 10px; margin-top: 10px; width: 100%;">
-                    <button id="btnPrintCard" onclick="window.print()" class="btn-print-id" style="flex: 1; display: none; background: #333; color: white; padding: 12px; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">
+                    <button id="btnPrintCard" onclick="window.print()" class="btn-print-id" style="flex: 1;">
                         <i class="fas fa-print"></i> طباعة الكارنيه
                     </button>
-                    <button id="btnDownloadCard" onclick="downloadIDCardAsImage()" style="flex: 1; display: none; background: var(--gold); color: white; padding: 12px; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-family:'Cairo';">
+                    <button id="btnDownloadCard" onclick="downloadIDCardAsImage()" style="flex: 1; display: none; background: var(--gold-gradient); color: white; padding: 14px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; font-family:'Cairo'; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
                         <i class="fas fa-download"></i> تحميل كصورة PNG
                     </button>
                 </div>
             </div>
 
-            <div id="id-card-preview" class="id-card-view" style="width: 320px; min-height: 480px; margin: 0 auto; background: linear-gradient(135deg, #ffffff 0%, #f4f7f9 100%); border: 3px solid var(--blue); border-radius: 16px; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); position: relative; font-family: 'Cairo'; text-align: center; border-bottom: 8px solid var(--gold);">
-                <div class="id-card-header-v" style="border-bottom: 2px solid var(--gold); padding-bottom: 10px; margin-bottom: 15px;">
-                    <h3 style="color: var(--blue); font-size: 1.1rem; font-weight: 900; margin: 0;">رواد التطوير والتنمية الشبابية</h3>
-                    <p style="font-size: 0.75rem; color: #555; margin: 3px 0 0 0;">وزارة الشباب والرياضة • YDP</p>
+            <div id="id-card-preview" class="id-card-view">
+                <div class="id-card-header-v">
+                    <h3>رواد التطوير والتنمية الشبابية</h3>
+                    <p>منصة الجان الموحدة • GAN TEAM</p>
                 </div>
                 
-                <div class="member-photo-box-v" style="width: 115px; height: 140px; margin: 0 auto 15px auto; border: 3px solid var(--gold); border-radius: 8px; overflow: hidden; background: #eee; display: flex; align-items: center; justify-content: center;">
-                    <img id="id-photo-preview" src="https://via.placeholder.com/110x135" alt="الصورة" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="member-photo-box-v">
+                    <img id="id-photo-preview" src="https://via.placeholder.com/110x135" alt="الصورة">
                 </div>
                 
-                <div class="id-info-v" style="text-align: right; background: rgba(0,0,0,0.02); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
-                    <div class="id-info-group" style="margin-bottom: 8px;">
-                        <span style="font-size: 0.7rem; color: var(--gold); font-weight: bold; display: block;">الاسم الكامل</span>
-                        <p id="display-name" style="margin: 0; font-size: 0.95rem; font-weight: bold; color: #222;">---</p>
+                <div class="id-info-v">
+                    <div class="id-info-group">
+                        <span>الاسم الكامل</span>
+                        <p id="display-name">---</p>
                     </div>
-                    <div class="id-info-group" style="margin-bottom: 8px;">
-                        <span style="font-size: 0.7rem; color: var(--gold); font-weight: bold; display: block;">المحافظة النيابية</span>
-                        <p id="display-gov" style="margin: 0; font-size: 0.9rem; color: #444;">---</p>
+                    <div class="id-info-group">
+                        <span>المحافظة النيابية</span>
+                        <p id="display-gov">---</p>
                     </div>
                     <div class="id-info-group" style="border:none;">
-                        <span style="font-size: 0.7rem; color: var(--gold); font-weight: bold; display: block;">المنصب / اللجنة التخصصية</span>
-                        <p id="display-pos" style="margin: 0; font-size: 0.9rem; font-weight: bold; color: var(--blue);">---</p>
+                        <span>المنصب / اللجنة التخصصية</span>
+                        <p id="display-pos">---</p>
                     </div>
                 </div>
 
-                <div id="id-qrcode-box" style="width: 80px; height: 80px; margin: 10px auto; background: white; padding: 4px; border-radius: 8px; border: 2px solid var(--blue); display: flex; align-items: center; justify-content: center;">
-                    <img id="id-qrcode-img" src="https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=YDP-2026" style="width: 100%; height: 100%; object-fit: contain;">
+                <div id="id-qrcode-box">
+                    <img id="id-qrcode-img" src="https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=SAIB-GAN-2026" style="width: 100%; height: 100%; object-fit: contain;">
                 </div>
                 
-                <div class="id-card-footer-v" style="font-size: 0.7rem; color: #666; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 8px;">
+                <div class="id-card-footer-v">
                     بطاقة عضوية رقمية موثقة لعام 2026
                 </div>
             </div>
@@ -340,23 +347,23 @@ function renderPaginationControls() {
     if (!container) return;
     
     if (totalWorkspaceItems.length === 0) {
-        container.innerHTML = "<p style='color: #666; font-size: 0.9rem;'>لا يوجد أعضاء موثقين مسجلين حالياً.</p>";
+        container.innerHTML = "<p style='color: #64748b; font-size: 0.9rem; text-align: center; width: 100%;'>لا يوجد أعضاء موثقين مسجلين حالياً.</p>";
         return;
     }
 
     const totalPages = Math.ceil(totalWorkspaceItems.length / itemsPerPage);
     let html = '';
     if (currentWorkspacePage > 1) {
-        html += `<button onclick="changeWorkspacePage(${currentWorkspacePage - 1})" style="padding: 5px 12px; background: var(--blue); color: white; border: none; border-radius: 5px; cursor: pointer;">السابق</button>`;
+        html += `<button onclick="changeWorkspacePage(${currentWorkspacePage - 1})">السابق</button>`;
     }
     
     for (let i = 1; i <= totalPages; i++) {
-        const activeStyle = i === currentWorkspacePage ? 'background: var(--gold); color: white; font-weight: bold;' : 'background: #eee; color: #333;';
-        html += `<button onclick="changeWorkspacePage(${i})" style="padding: 5px 12px; border: none; border-radius: 5px; cursor: pointer; ${activeStyle}">${i}</button>`;
+        const activeStyle = i === currentWorkspacePage ? 'background: var(--gold-gradient); color: white; border-color: var(--gold-light);' : '';
+        html += `<button onclick="changeWorkspacePage(${i})" style="${activeStyle}">${i}</button>`;
     }
     
     if (currentWorkspacePage < totalPages) {
-        html += `<button onclick="changeWorkspacePage(${currentWorkspacePage + 1})" style="padding: 5px 12px; background: var(--blue); color: white; border: none; border-radius: 5px; cursor: pointer;">التالي</button>`;
+        html += `<button onclick="changeWorkspacePage(${currentWorkspacePage + 1})">التالي</button>`;
     }
     
     container.innerHTML = html;
@@ -372,11 +379,11 @@ function renderPaginationControls() {
     paginatedItems.forEach(item => {
         const cardDiv = document.createElement('div');
         cardDiv.className = 'info-card dynamic-member-card';
-        cardDiv.style = "background: white; color: black; padding: 20px; border-radius: 15px; border-bottom: 3px solid var(--gold); box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-top: 15px; text-align: right;";
+        cardDiv.style = "background: rgba(255,255,255,0.02); color: white; padding: 15px; border-radius: 15px; border-bottom: 3px solid var(--gold); border-top: 1px solid rgba(255,255,255,0.04); margin-top: 12px; text-align: right; width: 100%;";
         cardDiv.innerHTML = `
-            <h4 style="color: var(--blue); margin-bottom: 8px;"><i class="fas fa-user"></i> ${item.fullName}</h4>
-            <p style="font-size: 0.9rem; margin: 4px 0;"><strong>المحافظة:</strong> ${item.governorate}</p>
-            <p style="font-size: 0.9rem; margin: 4px 0;"><strong>المنصب:</strong> ${item.position} / ${item.committee}</p>
+            <h4 style="color: var(--gold-light); margin-bottom: 6px;"><i class="fas fa-user"></i> ${item.fullName}</h4>
+            <p style="font-size: 0.85rem; margin: 4px 0; color:#e2e8f0;"><strong>المحافظة:</strong> ${item.governorate}</p>
+            <p style="font-size: 0.85rem; margin: 4px 0; color:#8a99ad;"><strong>المنصب:</strong> ${item.position} / ${item.committee}</p>
         `;
         grid.appendChild(cardDiv);
     });
@@ -420,8 +427,7 @@ async function checkAndVerifyID() {
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
 
-        // تشفير وحقن بيانات العضو الفعلية الموثقة في الـ QR Code لايف
-        const finalQrData = `YDP Verified Secure Member\n-------------------------\nName: ${name}\nNational ID: ${nationalId}\nRole: ${pos} / ${comm}\nGovernorate: ${gov}\nMinistry of Youth & Sports - 2026`;
+        const finalQrData = `SAIB GAN TEAM Verified Member\n-------------------------\nName: ${name}\nNational ID: ${nationalId}\nRole: ${pos} / ${comm}\nGovernorate: ${gov}\nSecure Portal 2026`;
         const qrImg = document.getElementById('id-qrcode-img');
         if (qrImg) {
             qrImg.src = `https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=${encodeURIComponent(finalQrData)}`;
@@ -438,17 +444,16 @@ async function checkAndVerifyID() {
     }
 }
 
-// دالة تحميل الكارنيه كصورة PNG فوراً وحفظها بدقة ممتازة ونقية لمنع البكسلة
 function downloadIDCardAsImage() {
     const cardElement = document.getElementById('id-card-preview');
-    const memberName = document.getElementById('input-name').value.trim() || "YDP-Member";
+    const memberName = document.getElementById('input-name').value.trim() || "GAN-Member";
     
     if(!cardElement) return;
 
     html2canvas(cardElement, {
-        scale: 2, // مضاعفة الدقة والجودة
-        useCORS: true, // تفعيل جلب الصور الخارجية لضمان عدم حجب لوجو أو كود
-        backgroundColor: null // خلفية شفافة للحفاظ على انحناءات الكارت
+        scale: 2, 
+        useCORS: true, 
+        backgroundColor: null 
     }).then(canvas => {
         const imageURL = canvas.toDataURL("image/png");
         const downloadLink = document.createElement('a');
@@ -486,7 +491,7 @@ function updateIDCard() {
     }
 
     if(nameText || nationalText) {
-        const qrData = `YDP Member: ${nameText} | National ID: ${nationalText} | Gov: ${govText} | Verified 2026`;
+        const qrData = `GAN Member: ${nameText} | ID: ${nationalText} | Verified 2026`;
         const qrImg = document.getElementById('id-qrcode-img');
         if (qrImg) {
             qrImg.src = `https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=${encodeURIComponent(qrData)}`;
@@ -495,9 +500,9 @@ function updateIDCard() {
 }
 
 // --- باقي وظائف السيستم واللوحات المساعدة لضمان عمل الأزرار بالملي ---
-function renderCommittees() { const grid = document.getElementById('committees-grid'); if (grid) grid.innerHTML = committeeDesc.map(c => `<div class="info-card" style="background:white; color:black; padding:20px; border-radius:15px; border-bottom:3px solid #b8860b; box-shadow:0 4px 10px rgba(0,0,0,0.05);"><h3>${c.title}</h3><p>${c.text}</p></div>`).join(''); }
-function renderNews() { const list = document.getElementById('news-list'); if (!list) return; db.collection("news").orderBy("timestamp", "desc").onSnapshot(s => { list.innerHTML = s.docs.map(doc => `<div class="info-card" style="border-right:4px solid #b8860b; padding:15px; margin-bottom:10px; background:white; color:black; text-align:right;"><p>${doc.data().text}</p></div>`).join(''); }); }
-function renderActivities() { const container = document.getElementById('activities-container'); if (!container) return; db.collection("activities").orderBy("timestamp", "desc").onSnapshot(s => { container.innerHTML = s.docs.map(doc => { const images = doc.data().images || []; return `<div class="activity-post" style="background:white; padding:15px; border-radius:12px; margin-bottom:20px; color:black; text-align:right;">${images[0] ? `<img src="${images[0]}" style="width:100%; border-radius:8px; margin-bottom:10px;">` : ''}<p>${doc.data().text}</p></div>`; }).join(''); }); }
+function renderCommittees() { const grid = document.getElementById('committees-grid'); if (grid) grid.innerHTML = committeeDesc.map(c => `<div class="info-card" style="background:rgba(255,255,255,0.02); color:white; padding:20px; border-radius:15px; border-bottom:3px solid var(--gold); border-top:1px solid rgba(255,255,255,0.04); text-align:right;"><h3>${c.title}</h3><p style="color:#8a99ad; font-size:0.85rem; margin-top:5px;">${c.text}</p></div>`).join(''); }
+function renderNews() { const list = document.getElementById('news-list'); if (!list) return; db.collection("news").orderBy("timestamp", "desc").onSnapshot(s => { list.innerHTML = s.docs.map(doc => `<div class="info-card" style="border-right:4px solid var(--red-ministry); padding:12px; margin-bottom:10px; background:rgba(255,255,255,0.02); color:white; text-align:right;"><p>${doc.data().text}</p></div>`).join(''); }); }
+function renderActivities() { const container = document.getElementById('activities-container'); if (!container) return; db.collection("activities").orderBy("timestamp", "desc").onSnapshot(s => { container.innerHTML = s.docs.map(doc => { const images = doc.data().images || []; return `<div class="activity-post" style="background:rgba(255,255,255,0.02); padding:15px; border-radius:12px; margin-bottom:20px; color:white; text-align:right; border:1px solid rgba(255,255,255,0.04);">${images[0] ? `<img src="${images[0]}" style="width:100%; border-radius:8px; margin-bottom:10px; border:1px solid rgba(255,255,255,0.05);">` : ''}<p>${doc.data().text}</p></div>`; }).join(''); }); }
 function logout() { location.reload(); }
 function renderAllUI() { renderNews(); renderActivities(); renderCommittees(); }
 window.onload = renderAllUI;
