@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YDP | رواد التطوير</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://script.google.com/macros/s/AKfycbx123xgH-HBkM8r5Hv-XlNEEcKGggO6JHQqdcoXUk9Ob4QtNGZI9MKNlMBDcYE_j3up/exec"
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body class="light-theme">
 
@@ -18,9 +19,9 @@
             <h2>بوابة رواد التطوير</h2>
             <div id="main-options" class="options-grid">
                 <button onclick="guestAccess()"><i class="fas fa-eye"></i> دخول الزوار</button>
-                <button onclick="showAccessInput()"><i class="fas fa-map-marker-alt"></i> المحافظات</button>
-                <button onclick="showAccessInput()"><i class="fas fa-users"></i> اللجان المركزية</button>
-                <button onclick="showAccessInput()" class="btn-exec"><i class="fas fa-user-shield"></i> المكتب التنفيذي</button>
+                <button onclick="showAccessInput('provinces')"><i class="fas fa-map-marker-alt"></i> المحافظات</button>
+                <button onclick="showAccessInput('committees')"><i class="fas fa-users"></i> اللجان المركزية</button>
+                <button onclick="showAccessInput('executive')"><i class="fas fa-user-shield"></i> المكتب التنفيذي</button>
             </div>
             <div id="code-input-area" style="display:none;">
                 <input type="password" id="access-code" placeholder="أدخل كود الدخول السري">
@@ -42,6 +43,7 @@
                 <a href="#about-section">القيادة</a>
                 <a href="#workspace-section">بوابة الـ ID</a>
                 <a href="#interview-section" id="nav-interview" style="display:none;">المقابلات</a>
+                <a href="#admin-dashboard-section" id="nav-admin-dashboard" style="display:none;">لوحة النتائج</a>
                 <a href="#activities-section">الأنشطة</a>
                 <a href="#news-section">الأخبار</a>
                 <button onclick="logout()" class="logout-btn">خروج</button>
@@ -50,6 +52,55 @@
     </header>
 
     <main>
+        <section id="admin-dashboard-section" class="section" style="display:none; background: #fdfdfd; border-bottom: 2px solid var(--gold);">
+            <h2 class="section-title">لوحة تحكم رصد المتقدمين والنتائج لايف</h2>
+            <div class="login-card" style="max-width: 1100px; margin: 0 auto; text-align: right; background: white; padding: 25px; border-radius: 15px; box-shadow: var(--card-shadow);">
+                <h4 style="color: var(--blue); font-weight: bold; margin-bottom: 15px;"><i class="fas fa-filter"></i> أدوات الفلترة والبحث السريع:</h4>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                    <input type="text" id="search-cand-name" placeholder="🔍 ابحث باسم المتقدم..." oninput="filterInterviewTable()" style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-family: 'Cairo'; font-size: 0.95rem;">
+                    
+                    <select id="filter-comm" onchange="filterInterviewTable()" style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-family: 'Cairo'; font-size: 0.95rem; background: white;">
+                        <option value="">كل اللجان / المستويات</option>
+                        <option value="IT">لجنة IT</option>
+                        <option value="HR">لجنة HR</option>
+                        <option value="PR">لجنة PR</option>
+                        <option value="Media">لجنة ميديا</option>
+                        <option value="OR">لجنة تنظيم</option>
+                        <option value="PI">لجنة مشروعات</option>
+                        <option value="Coordinators">تقييم المنسقين</option>
+                        <option value="Heads">تقييم الهيدات</option>
+                    </select>
+
+                    <select id="filter-status" onchange="filterInterviewTable()" style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-family: 'Cairo'; font-size: 0.95rem; background: white;">
+                        <option value="">كل الحالات</option>
+                        <option value="مقبول">مقبول فقط</option>
+                        <option value="مرفوض">مرفوض فقط</option>
+                    </select>
+                </div>
+
+                <div style="overflow-x: auto; border: 1px solid #eee; border-radius: 10px;">
+                    <table style="width: 100%; border-collapse: collapse; text-align: right; font-family: 'Cairo'; font-size: 0.95rem;">
+                        <thead>
+                            <tr style="background: var(--blue); color: white;">
+                                <th style="padding: 12px; border-bottom: 2px solid var(--gold);">الاسم الثلاثي</th>
+                                <th style="padding: 12px; border-bottom: 2px solid var(--gold);">اللجنة/المستوى</th>
+                                <th style="padding: 12px; border-bottom: 2px solid var(--gold);">جهة التقييم</th>
+                                <th style="padding: 12px; border-bottom: 2px solid var(--gold);">النسبة</th>
+                                <th style="padding: 12px; border-bottom: 2px solid var(--gold);">الحالة</th>
+                                <th style="padding: 12px; border-bottom: 2px solid var(--gold);">الملاحظات والسلوك</th>
+                            </tr>
+                        </thead>
+                        <tbody id="interview-results-tbody">
+                            <tr>
+                                <td colspan="6" style="text-align: center; padding: 20px; color: #777;">جاري جلب وتحديث كشوفات المتقدمين من خادم السحابة الموحد...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
         <section id="interview-section" class="section" style="display:none; background: #fff;">
             <h2 class="section-title">نظام المقابلات الموحد وأدلة القيادة (YDP)</h2>
             <div class="login-card" style="max-width: 600px; margin: 0 auto; text-align: right; border: 1px solid var(--gold); background: white; padding: 25px; border-radius: 15px; border-bottom: 6px solid var(--gold);">
@@ -65,10 +116,12 @@
                         <button onclick="startInterview('PI')">لجنة مشروعات</button>
                     </div>
 
-                    <h4 style="margin-bottom: 12px; color: var(--gold); font-weight: bold;"><i class="fas fa-crown"></i> أدلة مقابلات الإدارة والقيادة:</h4>
-                    <div class="options-grid">
-                        <button onclick="startInterview('Coordinators')" style="background: var(--gold); color: white;">أسئلة المنسقين</button>
-                        <button onclick="startInterview('Heads')" style="background: var(--blue); color: white;">أسئلة الهيدات (Heads)</button>
+                    <div id="exec-questions-area" style="display:none;">
+                        <h4 style="margin-bottom: 12px; color: var(--gold); font-weight: bold;"><i class="fas fa-crown"></i> أدلة مقابلات الإدارة والقيادة:</h4>
+                        <div class="options-grid">
+                            <button onclick="startInterview('Coordinators')" style="background: var(--gold); color: white;">أسئلة المنسقين</button>
+                            <button onclick="startInterview('Heads')" style="background: var(--blue); color: white;">أسئلة الهيدات (Heads)</button>
+                        </div>
                     </div>
                 </div>
 
@@ -80,7 +133,7 @@
                     
                     <div id="questions-container" style="background: #f4f7f9; padding: 15px; border-radius: 12px; margin-bottom: 15px;"></div>
 
-                    <textarea id="cand-notes" placeholder="ملاحظات الإنترفيو والسلوك (لباقة، التزام، مظهر...)" style="width:100%; height:90px; padding:12px; margin-bottom:15px; border-radius:8px; border:1px solid #ccc; font-family: 'Cairo'; font-size:1rem;"></textarea>
+                    <textarea id="cand-notes" placeholder="ملاحظات الإنترفيو والسلوك (لباقة، التزام، مظهر...)" style="width:100%; height:90px; padding:12px; margin-bottom:15px; border-radius:8px; border:1px solid #ccc; font-family: 'Cairo'; font-size:1rem CONTAINER;"></textarea>
                     
                     <button onclick="submitInterviewData()" class="btn-exec" style="width:100%; padding:15px; background: var(--blue); color:white; border:none; border-radius:12px; cursor:pointer; font-family: 'Cairo'; font-weight: bold; font-size:1.1rem;">رصد النتيجة وحفظ الاستمارة</button>
                 </div>
@@ -90,6 +143,8 @@
         <section id="workspace-section" class="section" style="display:none; background: #f9f9f9; border-bottom: 2px solid #b8860b;">
             <h2 id="ws-title" class="section-title">بوابة الأعضاء</h2>
             <div id="members-grid" class="cards-grid" style="display: block;"></div>
+            
+            <div id="pagination-container" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px; padding: 10px;"></div>
         </section>
 
         <section id="about-section" class="executive-structure section">

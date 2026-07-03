@@ -1,117 +1,372 @@
-/* 1. الإعدادات العامة والألوان */
-:root {
-    --blue: #003366; 
-    --blue-dark: #001f3f;
-    --gold: #b8860b; 
-    --gold-light: #d4af37; 
-    --white: #ffffff;
-    --light-bg: #f4f7f9;
-    --red-ministry: #c0392b; 
-    --card-shadow: 0 12px 24px rgba(0,0,0,0.08);
+/* ==========================================================================
+   11. لوحة التحكم الشاملة والمطورة (The Main System Dashboard)
+   ========================================================================== */
+
+/* الحاوية الأساسية التي تقسم اللوحة: هيدر علوي + محتوى سفلي */
+.dashboard-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #03070c;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
-body { transition: 0.3s; direction: rtl; overflow-x: hidden; background-color: var(--light-bg); color: #333; }
-
-/* 2. شريط الأخبار العلوي */
-.top-news-bar {
-    position: fixed; top: 0; width: 100%; background: linear-gradient(90deg, var(--red-ministry), #962d22);
-    color: white; padding: 10px 0; z-index: 2100; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    font-weight: bold; font-size: 0.95rem;
+/* تقسيم المحتوى الرئيسي: قائمة جانبية + منطقة العمل المركزية */
+.dashboard-body {
+    display: flex;
+    flex: 1;
+    margin-top: 44px; /* موازنة مع شريط الأخبار والهيدر */
 }
-.ticker-text { display: inline-block; white-space: nowrap; animation: slideNews 25s linear infinite; }
-@keyframes slideNews { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
 
-/* 3. واجهة الدخول المطورة هندسياً بالملي */
-.overlay { position: fixed; inset: 0; background: radial-gradient(circle, var(--blue) 0%, var(--blue-dark) 100%); z-index: 3000; display: flex; justify-content: center; align-items: center; padding: 15px; }
-.login-card { background: white; padding: 40px 30px; border-radius: 24px; text-align: center; width: 100%; max-width: 420px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); border-bottom: 6px solid var(--gold); }
-.main-logo { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--gold); margin-bottom: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
-.login-card h2 { color: var(--blue); font-weight: 900; font-size: 1.6rem; margin-bottom: 20px; }
+/* --------------------------------------------------------------------------
+   A. القائمة الجانبية الفخمة (Sidebar Navigation)
+   -------------------------------------------------------------------------- */
+.dashboard-sidebar {
+    width: 260px;
+    background: rgba(13, 22, 33, 0.65);
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 25px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: fixed;
+    top: 104px; /* أسفل الهيدر الثابت */
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+}
 
-/* توزيع شبكي متناسق وثابت كالصورة */
-.options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
-.options-grid button { padding: 14px 12px; border: none; border-radius: 12px; background: var(--blue); color: white; cursor: pointer; font-weight: 700; transition: 0.3s; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 8px; font-family:'Cairo'; }
-.options-grid button:hover { background: var(--gold); transform: translateY(-2px); }
-.btn-exec { grid-column: 1 / -1; background: linear-gradient(135deg, var(--gold) 0%, #8a6405 100%) !important; font-size: 1.05rem !important; padding: 16px !important; }
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    color: #8a99ad;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 14px;
+    transition: all 0.25s ease;
+}
 
-#code-input-area input { width: 100%; padding: 12px; border-radius: 10px; border: 2px solid #ddd; margin-bottom: 15px; font-family: 'Cairo'; text-align: center; font-size: 1.1rem; outline:none; }
-#code-input-area button { padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-family: 'Cairo'; transition: 0.3s; }
+.sidebar-link i {
+    font-size: 1.15rem;
+    transition: transform 0.25s;
+}
 
-/* 4. الهيدر الثابت */
-.main-header { margin-top: 44px; background: rgba(255, 255, 255, 0.95); border-bottom: 3px solid var(--blue); padding: 15px 5%; position: sticky; top: 44px; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-.nav-container { display: flex; justify-content: space-between; align-items: center; }
-.logo-area { display: flex; align-items: center; }
-.logo-area img { width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--gold); margin-left: 12px; }
-.brand-name h2 { margin: 0; color: var(--blue); font-size: 1.4rem; font-weight: 900; }
-.brand-name span { color: var(--gold); font-size: 0.85rem; font-weight: bold; display: block; }
-nav { display: flex; align-items: center; gap: 20px; }
-nav a { color: var(--blue); text-decoration: none; font-weight: 700; transition: 0.3s; font-size: 0.95rem; }
-nav a:hover { color: var(--gold); }
+/* حالة الرابط النشط (Active Link) بتوهج نيون أورانج فخم */
+.sidebar-link.active {
+    background: linear-gradient(135deg, rgba(184, 134, 11, 0.2) 0%, rgba(184, 134, 11, 0.05) 100%);
+    color: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 4px 15px rgba(184, 134, 11, 0.1);
+}
 
-/* 5. الأقسام والعناوين */
-.section { padding: 50px 8%; text-align: center; }
-.section-title { color: var(--blue); font-size: 2.1rem; margin-bottom: 35px; display: inline-block; font-weight: 900; position: relative; padding-bottom: 12px; }
-.section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 5px; background: var(--gold); border-radius: 10px; }
-.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 30px; margin-top: 25px; }
+.sidebar-link:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.03);
+    color: #ffffff;
+    transform: translateX(-3px);
+}
 
-/* 6. ديزاين الكارنيه الطولي الفخم جداً (Vertical ID Card) */
-.id-card-view { 
-    width: 300px; 
-    height: 460px; 
-    margin: 30px auto; 
-    background: linear-gradient(135deg, #001a33 0%, #003366 50%, #00152b 100%); 
-    color: white; 
-    border: 3px solid var(--gold); 
-    border-radius: 20px; 
-    overflow: hidden; 
-    position: relative; 
+/* --------------------------------------------------------------------------
+   B. منطقة العمل الرئيسية (Main Workspace Grid Layout)
+   -------------------------------------------------------------------------- */
+.dashboard-main-content {
+    flex: 1;
+    margin-right: 260px; /* تفادي القائمة الجانبية */
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 1fr 380px; /* تقسيم المساحة: شبكة التحكم + البنل التعريفي اليمين */
+    gap: 25px;
+}
+
+/* تحية الترحيب العلوية */
+.dashboard-welcome-banner {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.dashboard-welcome-banner h2 {
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.dashboard-welcome-banner h2 span {
+    color: var(--gold-light);
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+.dashboard-welcome-banner p {
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+/* --------------------------------------------------------------------------
+   C. شبكة كروت الخدمات الملونة (Neon Service Grid)
+   -------------------------------------------------------------------------- */
+.services-neon-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.service-neon-card {
+    background: rgba(13, 22, 33, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    padding: 25px 20px;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.id-card-header-v { width: 100%; text-align: center; border-bottom: 2px dashed rgba(212, 175, 55, 0.3); padding-bottom: 12px; z-index: 2; }
-.id-card-header-v h3 { font-size: 1.1rem; color: var(--gold-light); font-weight: 900; margin-bottom: 2px; }
-.id-card-header-v p { font-size: 0.75rem; color: #ccc; }
 
-.member-photo-box-v { 
-    width: 110px; 
-    height: 135px; 
-    margin: 20px 0; 
-    border: 3px solid var(--gold); 
-    border-radius: 12px; 
-    overflow: hidden; 
-    background: #fff;
+/* الدوائر المتوهجة والأيقونات حسب كود اللون الموضح في صورتك بالملي */
+.neon-icon-wrapper {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    position: relative;
     z-index: 2;
 }
-.member-photo-box-v img { width: 100%; height: 100%; object-fit: cover; }
 
-.id-info-v { width: 100%; text-align: right; padding: 0 10px; z-index: 2; flex-grow: 1; }
-.id-info-group { margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 5px; }
-.id-info-v span { color: var(--gold-light); font-size: 0.8rem; font-weight: bold; display: block; margin-bottom: 2px; }
-.id-info-v p { color: #ffffff; font-size: 1.05rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* تخصيص الألوان والنيون لكل كارت (الأورانج، البنفسجي، الأزرق، الأخضر، السماوي، الأحمر) */
+.card-orange { --neon-color: 212, 175, 55; }
+.card-purple { --neon-color: 147, 51, 234; }
+.card-blue   { --neon-color: 37, 99, 235; }
+.card-green  { --neon-color: 22, 163, 74; }
+.card-cyan   { --neon-color: 6, 182, 212; }
+.card-red    { --neon-color: 220, 38, 38; }
 
-.id-card-footer-v { 
-    width: 100%; text-align: center; font-size: 0.7rem; color: var(--gold-light); font-weight: bold;
-    border-top: 1px solid rgba(212, 175, 55, 0.2); padding-top: 10px; margin-top: 10px; z-index: 2;
+.service-neon-card {
+    border-color: rgba(var(--neon-color), 0.15);
+    box-shadow: inset 0 0 15px rgba(var(--neon-color), 0.02);
 }
 
-/* 7. كروت القيادة والمسؤولين */
-.executive-structure { background: #f8fafc; border-radius: 24px; padding: 40px; border: 1px solid #e2e8f0; }
-.leader-card { background: white; padding: 30px; border-radius: 20px; box-shadow: var(--card-shadow); max-width: 340px; margin: 0 auto 40px; border: 2px solid var(--gold); }
-.leader-card img { width: 130px; height: 130px; border-radius: 50%; margin-bottom: 15px; border: 3px solid var(--blue); object-fit: cover; }
-.badge { background: var(--gold); color: white; padding: 6px 16px; border-radius: 30px; font-size: 0.85rem; font-weight: bold; display: inline-block; margin-bottom: 10px; }
-.exec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 25px; }
-.exec-card { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%); color: white; padding: 25px; border-radius: 18px; text-align: center; }
-.exec-card h4 { font-size: 1.15rem; margin-bottom: 6px; font-weight: bold; }
-.exec-card span { color: var(--gold-light); font-size: 0.85rem; font-weight: bold; }
-
-/* 8. أدوات سكشن الـ ID */
-.id-form-container input[type="text"] {
-    width: 100%; padding: 12px 15px; border-radius: 10px; border: 2px solid #e2e8f0; font-family: 'Cairo'; font-size: 0.95rem; outline: none; transition: 0.3s; margin-bottom: 12px;
+.neon-icon-wrapper {
+    background: rgba(var(--neon-color), 0.05);
+    border: 1px solid rgba(var(--neon-color), 0.3);
+    color: rgb(var(--neon-color));
+    box-shadow: 0 0 15px rgba(var(--neon-color), 0.1);
 }
-.btn-verify-id { background: var(--gold); color: white; border: none; padding: 14px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1rem; width: 100%; transition: 0.3s; font-family:'Cairo'; }
-.btn-print-id { background: var(--blue); color: white; border: none; padding: 14px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1rem; width: 100%; transition: 0.3s; display: none; margin-top: 10px; font-family:'Cairo'; }
-.btn-drive { background: var(--blue); color: white; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; font-family:'Cairo'; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-.logout-btn { background: var(--red-ministry); color: white; border: none; padding: 9px 18px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; font-family:'Cairo'; }
+
+.service-neon-card h3 {
+    color: #ffffff;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    z-index: 2;
+}
+
+.service-neon-card p {
+    color: #64748b;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex-grow: 1;
+    z-index: 2;
+}
+
+/* أزرار الدخول الصغيرة داخل الكروت */
+.btn-neon-action {
+    background: rgba(var(--neon-color), 0.1);
+    border: 1px solid rgba(var(--neon-color), 0.3);
+    color: #ffffff;
+    padding: 8px 24px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+    z-index: 2;
+}
+
+/* تأثيرات حركة الهوفر الذكية والنيون البراق */
+.service-neon-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(var(--neon-color), 0.5);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 25px rgba(var(--neon-color), 0.15);
+}
+
+.service-neon-card:hover .neon-icon-wrapper {
+    background: rgba(var(--neon-color), 0.2);
+    box-shadow: 0 0 25px rgba(var(--neon-color), 0.4);
+    transform: scale(1.05);
+}
+
+.btn-neon-action:hover {
+    background: rgb(var(--neon-color));
+    box-shadow: 0 0 15px rgba(var(--neon-color), 0.5);
+    transform: scale(1.03);
+}
+
+/* --------------------------------------------------------------------------
+   D. البنل الجانبي التعريفي المضيء (Right Info Panel & Stats)
+   -------------------------------------------------------------------------- */
+.dashboard-info-panel {
+    background: rgba(13, 22, 33, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 24px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* بوكس الصورة العلوية الكبيرة */
+.panel-banner-box {
+    width: 100%;
+    height: 180px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.panel-banner-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* شبكة الإحصائيات والأرقام (العدادات الأربعة بالأسفل) */
+.panel-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.stat-mini-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+}
+
+.stat-mini-card h5 {
+    color: var(--gold-light);
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.stat-mini-card p {
+    color: #64748b;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   E. شبكة لوحات العرض والـ Widgets السفلية (Bottom Analytics Row)
+   -------------------------------------------------------------------------- */
+.dashboard-bottom-row {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    margin-top: 10px;
+}
+
+/* حاوية أي لوحة ويدجت سفلية */
+.widget-panel-card {
+    background: rgba(13, 22, 33, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 24px;
+    padding: 22px;
+}
+
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 12px;
+}
+
+.widget-header h4 {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   F. تنسيق جداول لوحة التحكم النيون (Dark Table Dashboard)
+   -------------------------------------------------------------------------- */
+.dashboard-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: right;
+}
+
+.dashboard-table th {
+    color: #475569;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.dashboard-table td {
+    color: #e2e8f0;
+    font-size: 0.85rem;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.02);
+    font-weight: 500;
+}
+
+/* باجات الحالات النيون الملونة داخل الجدول */
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    display: inline-block;
+}
+.status-badge.accepted { background: rgba(22, 163, 74, 0.15); color: #22c55e; border: 1px solid rgba(22, 163, 74, 0.3); }
+.status-badge.pending  { background: rgba(212, 175, 55, 0.15); color: var(--gold-light); border: 1px solid rgba(212, 175, 55, 0.3); }
+.status-badge.rejected { background: rgba(220, 38, 38, 0.15); color: #ef4444; border: 1px solid rgba(220, 38, 38, 0.3); }
+
+/* --------------------------------------------------------------------------
+   G. التجاوب ودعم الشاشات (Responsive Control)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1150px) {
+    .dashboard-main-content {
+        grid-template-columns: 1fr; /* دمج البنل اليمين تحت لوحة التحكم في الشاشات المتوسطة */
+    }
+}
+
+@media (max-width: 850px) {
+    .services-neon-grid {
+        grid-template-columns: 1fr; /* تحول الكروت الستة لصف عمودي في الموبايل */
+    }
+    .dashboard-sidebar {
+        width: 70px; /* تصغير المنيو الجانبية لتظهر كأيقونات فقط */
+        padding: 20px 5px;
+    }
+    .sidebar-link span { display: none; } /* إخفاء نصوص المنيو في الموبايل */
+    .dashboard-main-content { margin-right: 70px; padding: 15px; }
+}
