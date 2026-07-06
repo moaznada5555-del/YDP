@@ -652,4 +652,160 @@ body.dark-theme {
 .footer-stamp-box-text .stamp-year {
     display: block;
     font-size: 0.75rem;
-    color: #2
+    color: #22c55e;
+    font-weight: 800;
+}
+
+/* ==========================================
+   9. جداول رصد البيانات (Data Tables)
+   ========================================== */
+.dashboard-table-wrapper {
+    overflow-x: auto;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: right;
+    font-size: 0.9rem;
+}
+
+.dashboard-table th {
+    background: #101c30;
+    padding: 14px 16px;
+    color: var(--text-white);
+    font-weight: 700;
+}
+
+.dashboard-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: #cbd5e1;
+}
+
+.dashboard-table tr:last-child td {
+    border-bottom: none;
+}
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.status-badge.accepted { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+.status-badge.rejected { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+.status-badge.pending { background: rgba(234, 179, 8, 0.15); color: #eab308; }
+
+.dashboard-bottom-row {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 20px;
+}
+
+.widget-panel-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: var(--card-shadow);
+}
+
+.exec-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.exec-card h4 { font-size: 0.95rem; font-weight: 700; color: #fff; }
+.exec-card span { font-size: 0.75rem; color: var(--text-muted); }
+
+/* ==========================================
+   10. شاشات التكيف والتجاوب (Responsive / Media Queries)
+   ========================================== */
+@media (max-width: 1024px) {
+    .dashboard-sidebar {
+        width: 70px;
+        padding: 20px 5px;
+    }
+    .sidebar-link span {
+        display: none;
+    }
+    .sidebar-link {
+        justify-content: center;
+        padding: 12px;
+    }
+    .dashboard-main-content {
+        margin-right: 70px;
+    }
+    .dashboard-bottom-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    /* تهيئة الحاوية الأساسية لتفادي تداخل العناصر على شاشة الموبايل */
+    .dashboard-body {
+        flex-direction: column;
+    }
+    
+    /* تثبيت شريط التنقل بالأسفل تماماً بشكل مستقر ومريح للعين ولا يتحرك */
+    .dashboard-sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 60px;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 5px;
+        z-index: 1500;
+        background: #0a111c;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        border-left: none;
+        overflow-y: hidden;
+        overflow-x: auto;
+    }
+    
+    .sidebar-link {
+        padding: 10px;
+    }
+    
+    .sidebar-link.active {
+        border-right: none;
+        border-bottom: 3px solid var(--blue-neon);
+        border-radius: 0;
+    }
+    
+    /* إلغاء تهميش المساحة اليمنى للمحتوى ليظهر كامل العرض على الشاشة الموبيل دون قص */
+    .dashboard-main-content {
+        margin-right: 0 !important;
+        padding: 15px;
+        padding-bottom: 80px; /* ترك مساحة سفلية حتى لا يغطي الشريط الثابت على المحتوى */
+        width: 100%;
+    }
+    
+    .sections-router-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-bottom-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================
+   11. حماية الطباعة واقتناص السكرين شوت (Print Styles Shield)
+   ========================================== */
+@media print {
+    body, html, .dashboard-layout, .dashboard-main-content, .login-card, .overlay {
+        display: none !important;
+    }
+}
