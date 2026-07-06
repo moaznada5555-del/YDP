@@ -116,12 +116,14 @@
                                 <span>المدير التنفيذي لكيان YDP</span>
                             </div>
                             <div class="exec-card">
-                            <h4>أ. منه مدحت</h4>
-                            <span>مساعد المدير التنفيذي شئون اللجان المركزية</span>
-                          </div>
-                          <div class="exec-card">
-                          <h4>أ:إسلام محمد </h4>
-                        <span>مساعد المدير التنفيذي شئون المحافظات</span>
+                                <h4>أ. منه مدحت</h4>
+                                <span>مساعد المدير التنفيذي شئون اللجان المركزية</span>
+                            </div>
+                            <div class="exec-card">
+                                <h4>أ:إسلام محمد </h4>
+                                <span>مساعد المدير التنفيذي شئون المحافظات</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -303,7 +305,7 @@
                                 <h4><i class="fas fa-bolt" style="color:#2563eb;"></i> ساحة توثيق الأنشطة والمؤتمرات الميدانية الحية</h4>
                             </div>
                             <div id="activity-controls" style="display:block;">
-                                <textarea id="activity-text" rows="3" placeholder="اكتب تفاصيل ومخرجات الفعالية أو التدريب الميداني اليوم..." class="id-form-container" style="width: 100%; margin-bottom: 10px;"></select>
+                                <textarea id="activity-text" rows="3" placeholder="اكتب تفاصيل ومخرجات الفعالية أو التدريب الميداني اليوم..." class="id-form-container" style="width: 100%; margin-bottom: 10px;"></textarea>
                                 <input type="file" id="activity-images" style="color:white; margin-bottom:10px; font-size:0.8rem;">
                                 <button onclick="postActivity()" class="btn-verify-id" style="width: 100%;">نشر الفعالية لايف على المنصة</button>
                             </div>
@@ -368,7 +370,7 @@
         window.initializeCoordinatorsFormLayout = function(container) {
             const coorQuestions = [
                 { q: "السؤال الأول: كيف تتعامل مع عضو غير ملتزم أو متفاعل في فريقك؟", opts: ["توجيه تنبيه شفهي خاص أولاً وفقاً للائحة", "استبعاد المرشح مباشرة بدون الرجوع للـ Head", "تجاهل الأمر لعدم إحداث حساسية داخل الأمانة"], ans: 0 },
-                { q: "السؤال الثاني: ما هي المهارات الأساسية التي يجب أن تتوفر في المنسق الناجح بالكيان؟", opts: ["المهارات التقنية المعقدة فقط", "القيادة، التواصل الفعال، وحل النزاعات التنظيمية", "القدرة على تنفيذ الأوامر دون مناقشة"], ans: 1 },
+                { q: "السؤال الثاني: ما هي المهارات الأساسية التي يجب أن تتوفر في المنسق الناجح بالكيان? ", opts: ["المهارات التقنية المعقدة فقط", "القيادة، التواصل الفعال، وحل النزاعات التنظيمية", "القدرة على تنفيذ الأوامر دون مناقشة"], ans: 1 },
                 { q: "السؤال الثالث: كيف تخطط لتوزيع المهام بعدالة بين أعضاء فريقك لضمان عدم الضغط؟", opts: ["توزيع المهام عشوائياً حسب الأسبقية للظهور", "دراسة كفاءة ووقت كل عضو وتوليه المهام تدريجياً", "إعتماد المهام الصعبة على الأعضاء القدامى فقط"], ans: 1 },
                 { q: "السؤال الرابع: ماذا تفعل لو تعارضت قراراتك كمنسق مع رؤية رئيس اللجنة (Head)؟", opts: ["عقد اجتماع لمناقشة وجهات النظر والوصول لحل توافقي", "التمسك برأيي وتطبيقه ميدانياً بشكل منفصل", "تقديم شكوى مباشرة للمكتب التنفيذي دون نقاش الـ Head"], ans: 0 }
             ];
@@ -402,7 +404,6 @@
                     
                     const radio = document.createElement("input");
                     radio.type = "radio";
-                    radio.name = `coor_q_${index}` nesting;
                     radio.name = `coor_q_${index}`;
                     radio.value = optIndex;
                     radio.style.marginLeft = "8px";

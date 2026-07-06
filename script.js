@@ -21,9 +21,9 @@ const db = firebase.firestore();
 // مصفوفة عالمية لحفظ بيانات الشيت وجلبها للـ Dashboard لايف
 let cachedInterviewData = [];
 
-// متغيرات العداد الزمني للمقابلات
-let interviewTimerInterval = null;
-let interviewSeconds = 0;
+// ربط متغيرات العداد الزمني بالـ window لضمان التزامن الكامل مع الـ index.html
+window.interviewTimerInterval = null;
+window.interviewSeconds = 0;
 
 // ==========================================
 // 2. المصفوفات وبنك الأسئلة وهيكل الكيان (بدون أي حذف)
@@ -36,10 +36,10 @@ const committeeQuestions = {
         "اشرح الفرق بين position: absolute و position: relative.",
         "ما هو الـ Flexbox وكيف نوسط عنصراً في منتصف الشاشة؟"
     ],
-    "HR": ["هل لديك مهارة حل النزاعات؟", "هل سبق لك إجراء مقابلات？", "هل تلتزم بالسرية التامة؟", "كيف تتعامل مع عضو غير ملتزم؟"],
+    "HR": ["هل لديك مهارة حل النزاعات؟", "هل سبق لك إجراء مقابلات؟", "هل تلتزم بالسرية التامة؟", "كيف تتعامل مع عضو غير ملتزم؟"],
     "PR": ["كيف تقنع شريكاً برعاية فعاليتنا؟", "ماذا تفعل لو حدث خطأ بروتوكولي أثناء فعالية؟", "كيف تبني علاقة قوية مع الجهات الخارجية؟"],
     "Media": ["ما هي البرامج والبرمجيات التي تجيد استخدامها في التصميم أو المونتاج؟", "كيف تتعامل مع ضغط الوقت عند طلب تصاميم عاجلة لفعالية قائمة؟"],
-    "Organization": ["كيف تتعامل مع الأعداد الكبيرة للمشاركين أثناء تنظيم طابور الدخول أو الفعاليات؟", "إذا حدث نقص طارئ في التجهيزات واللوجستيات قبل المؤتمر بساعة، كيف تتصرف؟"],
+    "Organization": ["كيف تتعامل مع الأعداد الكبيرة للمشاركين أثناء تنظيم طابور الدخول أو الفعاليات？", "إذا حدث نقص طارئ في التجهيزات واللوجستيات قبل المؤتمر بساعة، كيف تتصرف؟"],
     "FR": ["ما هو الفارق الأساسي بين إدارة المشروعات والمبادرات الشبابية؟", "كيف تضع ميزانية مرنة ودراسة جدوى مالية لحدث ضخم طارئ؟"],
     "Projects": ["كيف تضع خطة تشغيلية مبتكرة لمبادرة شبابية تخدم رؤية الكيان؟", "كيف تقيس مدى نجاح وتأثير مشروع قائم على الأرض؟"],
     
@@ -209,14 +209,14 @@ function startInterview(comm) {
         `).join('');
     }
 
-    // تشغيل العداد الزمني
-    clearInterval(interviewTimerInterval);
-    interviewSeconds = 0;
+    // تشغيل العداد الزمني الآمن المتصل بالنطاق العالمي
+    if(window.interviewTimerInterval) clearInterval(window.interviewTimerInterval);
+    window.interviewSeconds = 0;
     const timerDisplay = document.getElementById('interview-timer');
-    interviewTimerInterval = setInterval(() => {
-        interviewSeconds++;
-        let mins = Math.floor(interviewSeconds / 60).toString().padStart(2, '0');
-        let secs = (interviewSeconds % 60).toString().padStart(2, '0');
+    window.interviewTimerInterval = setInterval(() => {
+        window.interviewSeconds++;
+        let mins = Math.floor(window.interviewSeconds / 60).toString().padStart(2, '0');
+        let secs = (window.interviewSeconds % 60).toString().padStart(2, '0');
         if(timerDisplay) timerDisplay.innerText = `${mins}:${secs}`;
     }, 1000);
 }
@@ -263,7 +263,7 @@ async function submitInterviewData() {
         percentage = (scoreValue / questions.length) * 100;
     }
 
-    clearInterval(interviewTimerInterval);
+    if(window.interviewTimerInterval) clearInterval(window.interviewTimerInterval);
     status = percentage >= 50 ? "مقبول" : "مرفوض";
     let timeTaken = document.getElementById('interview-timer').innerText + " دقيقة";
 
@@ -285,7 +285,7 @@ async function submitInterviewData() {
         name: nameInput.value,
         gov: currentAccessType,
         committee: selectedCommittee,
-        interviewer: "منصة الجان الذكية",
+        interviewer: "منصة اللجان الذكية",
         score: percentage.toFixed(0),
         status: status,
         notes: notesInput.value || "لا يوجد"
@@ -297,11 +297,11 @@ async function submitInterviewData() {
         
         nameInput.value = "";
         notesInput.value = "";
-        cancelInterview();
+        if (typeof window.cancelInterview === 'function') window.cancelInterview();
     } catch (e) {
         console.error(e);
         alert("✅ تم الحفظ باللوحة المحلية بنجاح وجاري المزامنة الخلفية مع الشيت السحابي.");
-        cancelInterview();
+        if (typeof window.cancelInterview === 'function') window.cancelInterview();
     }
 }
 
@@ -499,6 +499,14 @@ function renderNews() {
                 <p style="font-size:0.9rem; font-family:'Cairo';">${doc.data().text}</p>
             </div>
         `).join(''); 
+        
+        // ربط ومزامنة شريط الأخبار المتحرك (Ticker-Text) تلقائياً بآخر خبر منشور لايف
+        if (s.docs.length > 0) {
+            const tickerText = document.querySelector('.ticker-text');
+            if (tickerText) {
+                tickerText.innerText = s.docs[0].data().text;
+            }
+        }
     }); 
 }
 
