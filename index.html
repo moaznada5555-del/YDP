@@ -2,234 +2,272 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة الجان | GAN TEAM</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>منصة YDP | YDP TEAM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
-<body class="dark-theme"> <div class="top-news-bar">
-        <div class="ticker-text">كيان الجان الموحد - منصة الإدارة والتحكم الذكية لعام 2026 © جميع الحقوق محفوظة</div>
+<body class="dark-theme"> 
+    <div class="top-news-bar">
+        <div class="ticker-text">كيان YDP الموحد - منصة الإدارة والتحكم الذكية لعام 2026 © جميع الحقوق محفوظة</div>
     </div>
 
     <div id="login-overlay" class="overlay">
         <div class="login-card">
             <div class="logo-platform">
-                <img src="https://i.postimg.cc/rp580Zh2/Whats-App-Image-2026-02-27-at-4-43-50-PM.jpg" class="main-logo" alt="GAN Logo">
+                <img src="https://verification-system-ydp.vercel.app/images/ydp-logo.png" alt="YDP Logo" class="main-logo" style="width: 100px; height: 100px; object-fit: contain; margin-bottom: 15px;">
+                <h2 class="welcome-text">منصة YDP الذكية <span class="highlight">YDP الموحدة</span></h2>
+                <p class="sub-text">نظام الإدارة الرقمي، رصد المقابلات وإصدار الهويات الرقمية لعام 2026</p>
             </div>
-            
-            <h2 class="welcome-text">مرحباً بك في <span class="highlight">منصة الجان</span></h2>
-            <p class="sub-text">اختر نوع الدخول والمستوى للمتابعة والوصول للخدمات</p>
-            
+
             <div id="main-options" class="dashboard-router-container">
                 <div class="btn-visitor-router" onclick="guestAccess()">
                     <div class="visitor-right-side">
-                        <div class="router-icon-circle">
-                            <i class="fas fa-user-friends"></i>
-                        </div>
+                        <div class="router-icon-circle"><i class="fas fa-eye"></i></div>
                         <div class="router-text-side">
-                            <h3>دخول الزوار</h3>
-                            <p>استعرض المعلومات المتاحة لعامة الزوار</p>
+                            <h3>بوابة الزوار والأعضاء</h3>
+                            <p>عرض الأنشطة والأخبار العامة للكيان دون صلاحيات تعديل</p>
                         </div>
                     </div>
-                    <i class="fas fa-chevron-left router-arrow-bottom"></i>
+                    <div class="router-arrow-bottom"><i class="fas fa-chevron-left"></i></div>
                 </div>
 
-                <div class="separator-text">أو اختر قسماً خاصاً بالإدارة</div>
+                <div class="separator-text">أو سجل دخول بصلاحيات الإدارة</div>
 
                 <div class="sections-router-grid">
-                    <div class="section-router-card" onclick="showAccessInput('provinces')">
-                        <div class="router-card-img-box">
-                            <i class="fas fa-map-marked-alt"></i>
-                        </div>
-                        <h4>المحافظات</h4>
-                        <p>اختر محافظتك لعرض معلومات الجان بالمحافظة</p>
-                        <i class="fas fa-chevron-left router-arrow-bottom"></i>
-                    </div>
-
-                    <div class="section-router-card" onclick="showAccessInput('committees')">
-                        <div class="router-card-img-box">
-                            <i class="fas fa-cubes"></i>
-                        </div>
-                        <h4>الجان المركزية</h4>
-                        <p>تعرف على الجان المركزية على مستوى الجمهورية</p>
-                        <i class="fas fa-chevron-left router-arrow-bottom"></i>
-                    </div>
-
                     <div class="section-router-card" onclick="showAccessInput('executive')">
-                        <div class="router-card-img-box">
-                            <i class="fas fa-user-shield"></i>
-                        </div>
+                        <div class="router-card-img-box"><i class="fas fa-crown"></i></div>
                         <h4>المكتب التنفيذي</h4>
-                        <p>تعرف على المكتب التنفيذي وأعضائه ومهامه</p>
-                        <i class="fas fa-chevron-left router-arrow-bottom"></i>
+                        <p>التحكم والرقابة الكاملة</p>
+                    </div>
+                    <div class="section-router-card" onclick="showAccessInput('committees')">
+                        <div class="router-card-img-box"><i class="fas fa-layer-group"></i></div>
+                        <h4>اللجان المركزية</h4>
+                        <p>إدارة لجان الأمانة العامة</p>
+                    </div>
+                    <div class="section-router-card" onclick="showAccessInput('provinces')">
+                        <div class="router-card-img-box"><i class="fas fa-map-marked-alt"></i></div>
+                        <h4>المحافظات</h4>
+                        <p>رصد لجان الفروع الميدانية</p>
                     </div>
                 </div>
             </div>
 
-            <div id="code-input-area" style="display:none; margin-top: 20px;">
-                <div class="or-separator">تأكيد صلاحية الدخول للقسم</div>
-                <div class="id-form-container">
-                    <input type="password" id="access-code" placeholder="أدخل كود الدخول السري المشفر">
-                    <div style="display: flex; gap: 12px; justify-content: center;">
-                        <button onclick="checkAccess()" class="btn-verify-id">تأكيد الدخول</button>
-                        <button onclick="backToMain()" class="logout-btn" style="background: var(--red-ministry);">رجوع</button>
-                    </div>
+            <div id="code-input-area" style="display:none;" class="id-form-container">
+                <div class="or-separator" id="dynamic-login-title">برجاء إدخال كود المصادقة الآمن للوصول</div>
+                <input type="password" id="access-code" placeholder="أدخل الكود السري الآمن المتوافق..." style="text-align: center;">
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button onclick="checkAccess()" class="btn-verify-id">تأكيد الرمز ودخول</button>
+                    <button onclick="backToMain()" class="btn-verify-id" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">عودة</button>
                 </div>
             </div>
-            
-            <div class="footer-terms">جميع الحقوق محفوظة © 2026 - <a href="#">منصة الجان الذكية</a></div>
         </div>
     </div>
 
     <div class="dashboard-layout">
-        
         <header class="main-header">
             <div class="nav-container">
                 <div class="logo-area">
-                    <img src="https://i.postimg.cc/rp580Zh2/Whats-App-Image-2026-02-27-at-4-43-50-PM.jpg" alt="SAIB GAN Logo">
+                    <img src="https://verification-system-ydp.vercel.app/images/ydp-logo.png" alt="Logo">
                     <div class="brand-name">
-                        <h2>الجان | SAIB</h2>
-                        <span>Student Activity & Initiative Body</span>
+                        <h2>منصة YDP الإدارية الذكية</h2>
+                        <span id="user-role-display">نطاق الوصول: زائر بالمنصة</span>
                     </div>
                 </div>
-                
-                <div style="position: relative; width: 300px;" class="hide-mobile">
-                    <input type="text" placeholder="ابحث هنا عما تريد..." style="width: 100%; padding: 8px 35px 8px 15px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: white; font-family: 'Cairo'; font-size: 0.85rem;">
-                    <i class="fas fa-search" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #475569; font-size: 0.9rem;"></i>
-                </div>
-
                 <nav>
-                    <div style="display: flex; align-items: center; gap: 10px; margin-left: 15px;">
-                        <i class="far fa-bell" style="color: #64748b; font-size: 1.2rem; cursor: pointer; position: relative;">
-                            <span style="position: absolute; top: -5px; left: -5px; background: #dc2626; width: 8px; height: 8px; border-radius: 50%;"></span>
-                        </i>
-                        <div style="text-align: left; display: flex; align-items: center; gap: 10px;">
-                            <div class="brand-name" style="text-align: right;">
-                                <h2 style="font-size: 0.9rem; color: #fff;">مرحباً، معاذ</h2>
-                                <span style="font-size: 0.75rem; color: var(--gold-light);">عضو في الجان</span>
-                            </div>
-                            <img src="https://i.postimg.cc/rp580Zh2/Whats-App-Image-2026-02-27-at-4-43-50-PM.jpg" style="width: 35px; height: 35px; border-radius: 50%; border: 1px solid var(--gold);">
-                        </div>
-                    </div>
-                    <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> خروج</button>
+                    <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> مغادرة اللوحة</button>
                 </nav>
             </div>
         </header>
 
         <div class="dashboard-body">
-            <aside class="dashboard-sidebar">
-                <a href="#welcome-zone" class="sidebar-link active"><i class="fas fa-home"></i> <span>الرئيسية</span></a>
-                <a href="#about-section" class="sidebar-link"><i class="fas fa-info-circle"></i> <span>تعريف الجان</span></a>
-                <a href="#workspace-section" class="sidebar-link"><i class="fas fa-id-card"></i> <span>ID الأعضاء</span></a>
-                <a href="#executive-structure-zone" class="sidebar-link"><i class="fas fa-sitemap"></i> <span>هيكل المكتب التنفيذي</span></a>
-                <a href="#interview-section" class="sidebar-link"><i class="fas fa-user-clock"></i> <span>الانترفيوهات</span></a>
-                <a href="#drive-zone" class="sidebar-link"><i class="fab fa-google-drive"></i> <span>Google Drive</span></a>
-                <a href="#news-section" class="sidebar-link"><i class="fas fa-newspaper"></i> <span>الأخبار</span></a>
-                <a href="#settings-zone" class="sidebar-link"><i class="fas fa-cog"></i> <span>الإعدادات</span></a>
+            <aside class="dashboard-sidebar" id="main-sidebar-navigation-zone">
+                <a href="#welcome-section" class="sidebar-link active" onclick="switchActiveLink(this)"><i class="fas fa-chart-pie"></i> <span>الرئيسية</span></a>
+                <a href="#workspace-section" class="sidebar-link" id="nav-work-link" onclick="switchActiveLink(this)"><i class="fas fa-id-card"></i> <span>الكارنيهات الرقمية</span></a>
+                <a href="#interview-section" class="sidebar-link" id="nav-interview-link" onclick="switchActiveLink(this)"><i class="fas fa-user-check"></i> <span>غرفة المقابلات</span></a>
+                <a href="#admin-dashboard-section" class="sidebar-link" id="nav-admin-link" onclick="switchActiveLink(this)"><i class="fas fa-sliders-h"></i> <span>لوحة النشر لايف</span></a>
             </aside>
 
             <main class="dashboard-main-content">
-                
-                <div id="welcome-zone" class="dashboard-welcome-banner">
-                    <h2>مرحباً بك في لوحة تحكم <span class="highlight">الجان</span></h2>
-                    <p>كل ما تحتاجه لإدارة الكيان ومتابعة الرصد والبيانات من مكان واحد ذكي</p>
+                <section id="welcome-section" class="dashboard-welcome-banner">
+                    <h2>أهلاً بك بـ منصة الإدارة السحابية والتحكم الذكي <span class="highlight">لـ كيان YDP</span></h2>
+                    <p>تابع التقارير، قم بإصدار بطاقات العضوية المشفرة بـ QR Code، وقم بإدارة استمارات المقابلات والتوثيق الحي للأخبار والفعاليات أولاً بأول لعام 2026.</p>
+                </section>
+
+                <div id="executive-structure-zone" style="display: none; margin-bottom: 25px;">
+                    <div class="widget-panel-card">
+                        <div class="widget-header">
+                            <h4><i class="fas fa-sitemap" style="color:#2563eb;"></i> الهيكل القيادي للمكتب التنفيذي لكيان YDP لعام 2026</h4>
+                        </div>
+                        <div class="services-neon-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px;">
+                            <div class="exec-card">
+                                <h4>ا: محمد حازم</h4>
+                                <span>رئيس مجلس الإدارة والمؤسس لكيان YDP</span>
+                            </div>
+                            <div class="exec-card">
+                                <h4>أ. يوسف عبد التواب</h4>
+                                <span>نائب رئيس مجلس ادارة الكيان</span>
+                            </div>
+                            <div class="exec-card">
+                                <h4>أ:سلمي ياسر </h4>
+                                <span>المدير التنفيذي لكيان YDP</span>
+                            </div>
+                            <div class="exec-card">
+                            <h4>أ. منه مدحت</h4>
+                            <span>مساعد المدير التنفيذي شئون اللجان المركزية</span>
+                          </div>
+                          <div class="exec-card">
+                          <h4>أ:إسلام محمد </h4>
+                        <span>مساعد المدير التنفيذي شئون المحافظات</span>
+                    </div>
                 </div>
 
                 <div class="services-neon-grid">
-                    
                     <div class="service-neon-card card-orange">
-                        <div class="neon-icon-wrapper"><i class="fas fa-book-open"></i></div>
-                        <h3>تعريف الجان</h3>
-                        <p>تعرف على رؤية الجان ورسالتها وأهدافها وتاريخ تأسيسها العريق.</p>
-                        <button class="btn-neon-action" onclick="window.location.hash='#about-section'">دخول <i class="fas fa-arrow-left"></i></button>
+                        <div class="neon-icon-wrapper"><i class="fas fa-qrcode"></i></div>
+                        <h3>نظام الكارنيهات الذكي</h3>
+                        <p>توليد هوية رقمية معتمدة وموثقة لجميع المقبولين بكيان YDP لعام 2026 في ثوانٍ معدودة وبدقة حوسبية عالية.</p>
+                        <a href="#workspace-section"><button class="btn-neon-action">الانتقال للنظام</button></a>
                     </div>
 
                     <div class="service-neon-card card-purple">
-                        <div class="neon-icon-wrapper"><i class="fas fa-id-badge"></i></div>
-                        <h3>ID الأعضاء</h3>
-                        <p>عرض بيانات الأعضاء الرسمية، تصاريحهم، ومعلوماتهم الشخصية والكارنيهات.</p>
-                        <button class="btn-neon-action" onclick="window.location.hash='#workspace-section'">دخول <i class="fas fa-arrow-left"></i></button>
+                        <div class="neon-icon-wrapper"><i class="fas fa-poll-h"></i></div>
+                        <h3>منظومة المقابلات الحية</h3>
+                        <p>بنك أسئلة ذكي للتقييم، استمارات فرز اللجان المركزية والمحافظات لايف مع آلية احتساب النسب المئوية تلقائياً.</p>
+                        <a href="#interview-section"><button class="btn-neon-action">فتح غرفة الاستمارات</button></a>
                     </div>
 
                     <div class="service-neon-card card-blue">
-                        <div class="neon-icon-wrapper"><i class="fas fa-network-wired"></i></div>
-                        <h3>هيكل المكتب التنفيذي</h3>
-                        <p>استعراض الهيكل التنظيمي الكامل للمكتب التنفيذي والقيادات العليا للكيان.</p>
-                        <button class="btn-neon-action" onclick="window.location.hash='#about-section'">دخول <i class="fas fa-arrow-left"></i></button>
-                    </div>
-
-                    <div class="service-neon-card card-green">
-                        <div class="neon-icon-wrapper"><i class="fas fa-microphone"></i></div>
-                        <h3>صفحة الانترفيوهات</h3>
-                        <p>جداول المواعيد، لجان المقابلات الشخصية، وتقييم وتصنيف المتقدمين الجدد.</p>
-                        <button class="btn-neon-action" onclick="startInterview('IT')">دخول <i class="fas fa-arrow-left"></i></button>
-                    </div>
-
-                    <div class="service-neon-card card-cyan">
-                        <div class="neon-icon-wrapper"><i class="fab fa-google-drive"></i></div>
-                        <h3>Google Drive</h3>
-                        <p>الوصول السحابي المباشر إلى ملفات الجان، النماذج، ومستندات العمل المشتركة.</p>
-                        <button class="btn-neon-action" id="drive-zone">دخول <i class="fas fa-arrow-left"></i></button>
-                    </div>
-
-                    <div class="service-neon-card card-red">
-                        <div class="neon-icon-wrapper"><i class="fas fa-bullhorn"></i></div>
-                        <h3>الأخبار</h3>
-                        <p>تابع آخر المستجدات والبيانات العاجلة ونشر الأخبار الجديدة والحصرية لايف.</p>
-                        <button class="btn-neon-action" onclick="window.location.hash='#news-section'">دخول <i class="fas fa-arrow-left"></i></button>
+                        <div class="neon-icon-wrapper"><i class="fas fa-database"></i></div>
+                        <h3>الربط والمزامنة السحابية</h3>
+                        <p>مزامنة حية ولحظية مع Google Sheets الخاص بالأمانة العامة لرصد وتجميع النتائج إلكترونياً بدون تدخل بشري.</p>
+                        <button class="btn-neon-action" id="drive-zone">ملفات الـ Drive الموحد</button>
                     </div>
                 </div>
 
-                <div class="dashboard-info-panel">
+                <section id="workspace-section" class="dashboard-info-panel" style="display:block;">
                     <div class="widget-header">
-                        <h4><i class="fas fa-feather-alt" style="color:var(--gold-light);"></i> تعريف الجان</h4>
+                        <h4><i class="fas fa-id-badge" style="color:#2563eb;"></i> بوابة إصدار وتحميل بطاقات العضوية الرسمية - YDP ID CARD 2026</h4>
                     </div>
-                    <div class="panel-banner-box">
-                        <img src="https://i.postimg.cc/rp580Zh2/Whats-App-Image-2026-02-27-at-4-43-50-PM.jpg" alt="YDP Cover">
-                    </div>
-                    <div style="text-align: right;">
-                        <h4 style="color:#fff; margin-bottom:8px; font-weight:700;">نبذة عن الجان</h4>
-                        <p style="color:#64748b; font-size:0.85rem; line-height:1.6;">الجان هو كيان طلابي يهدف إلى صقل المهارات وتنمية قدرات الطلاب وإعداد جيل قادر على صناعة التغيير الإيجابي والتطوير في المجتمع.</p>
-                    </div>
-                    
-                    <div class="panel-stats-grid">
-                        <div class="stat-mini-card">
-                            <h5>2022</h5>
-                            <p>تأسس في</p>
-                        </div>
-                        <div class="stat-mini-card">
-                            <h5>30+</h5>
-                            <p>إنجاز وتكريم</p>
-                        </div>
-                        <div class="stat-mini-card">
-                            <h5>15+</h5>
-                            <p>فعالية سنوية</p>
-                        </div>
-                        <div class="stat-mini-card">
-                            <h5>250+</h5>
-                            <p>عضو نشط</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dashboard-bottom-row">
-                    
-                    <section id="admin-dashboard-section" class="widget-panel-card">
-                        <div class="widget-header">
-                            <h4><i class="fas fa-chart-line" style="color:var(--gold-light);"></i> رصد المتقدمين والنتائج لايف</h4>
-                        </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 20px; justify-content: center;">
                         
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 15px;">
-                            <input type="text" id="search-cand-name" placeholder="🔍 ابحث باسم المتقدم..." oninput="filterInterviewTable()" style="padding: 8px; border-radius: 8px; background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); color:white; font-family: 'Cairo'; font-size: 0.85rem;">
-                            
-                            <select id="filter-comm" onchange="filterInterviewTable()" style="padding: 8px; border-radius: 8px; background:#0d1621; border:1px solid rgba(255,255,255,0.08); color:white; font-family: 'Cairo'; font-size: 0.85rem;">
-                                <option value="">كل اللجان</option>
-                                <option value="IT">لجنة IT</option>
-                                <option value="HR">لجنة HR</option>
-                                <option value="PR">لجنة PR</option>
-                                <option value="Media">لجنة ميديا</option>
+                        <div class="id-form-container" style="flex: 1; min-width: 300px; max-width: 500px; text-align: right;">
+                            <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 5px; font-weight: bold;">اسم العضو الثلاثي:</label>
+                            <input type="text" id="id-input-name" placeholder="مثال: أحمد محمد علي" oninput="updateIDCard()">
+
+                            <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 5px; font-weight: bold;">اللجنة أو الأمانة المستهدفة:</label>
+                            <select id="id-input-committee" onchange="updateIDCard()">
+                                <option value="لجنة الموارد البشرية">لجنة الموارد البشرية (HR)</option>
+                                <option value="لجنة العلاقات العامة">لجنة العلاقات العامة (PR)</option>
+                                <option value="لجنة السوشيال ميديا والمنصات">لجنة السوشيال ميديا والمنصات (Media)</option>
+                                <option value="لجنة التنظيم واللوجستيات">لجنة التنظيم واللوجستيات (Organization)</option>
+                                <option value="لجنة التدريب والتطوير">لجنة التدريب والتطوير (Training)</option>
+                                <option value="لجنة المشروعات والمبادرات">لجنة المشروعات والمبادرات (Projects)</option>
+                                <option value="لجنة إدارة العضوية والمالية">لجنة إدارة العضوية والمالية (Financial)</option>
+                            </select>
+
+                            <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 5px; font-weight: bold;">رفع الصورة الشخصية الرسمية:</label>
+                            <input type="file" id="id-input-file" accept="image/*" onchange="loadIDImage(event)" style="padding: 8px;">
+
+                            <button onclick="downloadIDCard()" class="btn-verify-id" style="width: 100%; margin-top: 10px; display: flex; justify-content: center; align-items: center; gap: 10px;">
+                                <i class="fas fa-download"></i> تصدير وتحميل الكارنيه المعتمد كصورة PNG
+                            </button>
+                        </div>
+
+                        <div id="id-card-capture-area" style="display:flex; justify-content:center; align-items:center;">
+                            <div class="ydp-digital-id-card" id="ydp-digital-id-card">
+                                <div class="id-card-top-header">
+                                    <img src="https://verification-system-ydp.vercel.app/images/ydp-logo.png" alt="YDP" class="card-top-logo">
+                                    <div class="card-header-titles">
+                                        <h1>برنامج التقييم والتدريب الصيفي 2026</h1>
+                                        <h2>بالتعاون مع بنك الشركة المصرفية العربية الدولية SAIB</h2>
+                                    </div>
+                                </div>
+                                
+                                <div class="id-card-body-content">
+                                    <div class="id-card-photo-frame">
+                                        <img src="https://via.placeholder.com/150" id="card-display-img" alt="Member Photo">
+                                    </div>
+                                    <div class="id-card-user-info-text">
+                                        <h3 id="card-display-name">إسم العضو الثلاثي</h3>
+                                        <p id="card-display-committee">لجنة الموارد البشرية</p>
+                                    </div>
+                                </div>
+
+                                <div class="id-card-bottom-footer-zone">
+                                    <div id="id-qrcode-box" class="id-qrcode-box"></div>
+                                    <div class="footer-stamp-box-text">
+                                        <span class="stamp-title">كارنيه معتمد وموثق</span>
+                                        <span class="stamp-year">العام التدريبي 2026</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <section id="interview-section" class="dashboard-info-panel" style="display:block;">
+                    <div class="widget-header">
+                        <h4><i class="fas fa-user-check" style="color:#2563eb;"></i> غرف المقابلات الشخصية ورصد درجات الفرز الميداني والمركزي لايف</h4>
+                    </div>
+
+                    <div id="interview-main-menu" style="display:block; margin-top:15px;">
+                        <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:15px; text-align:right;">اختر اللجنة المستهدفة لإطلاق استمارة المقابلة الشخصية وتفعيل العداد الإلكتروني والبدء في تقييم المرشح فوراً:</p>
+                        <div class="options-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:12px;">
+                            <button class="btn-login" onclick="startInterview('HR')"><i class="fas fa-users-cog"></i> الموارد البشرية HR</button>
+                            <button class="btn-login" onclick="startInterview('PR')"><i class="fas fa-handshake"></i> العلاقات العامة PR</button>
+                            <button class="btn-login" onclick="startInterview('Media')"><i class="fas fa-photo-video"></i> السوشيال ميديا Media</button>
+                            <button class="btn-login" onclick="startInterview('Organization')"><i class="fas fa-cubes"></i> التنظيم واللوجستيات</button>
+                            <button class="btn-login" onclick="startInterview('Projects')"><i class="fas fa-project-diagram"></i> المشروعات والمبادرات</button>
+                            <button class="btn-login" onclick="startInterview('FR')"><i class="fas fa-donate"></i> التمويل والإدارة المالية</button>
+                            <button class="btn-login" onclick="startInterview('Coordinators')"><i class="fas fa-user-shield"></i> استمارة منسقين اللجان</button>
+                        </div>
+                    </div>
+
+                    <div id="interview-form-area" style="display:none; margin-top:20px; background:rgba(0,0,0,0.2); padding:20px; border-radius:15px; border:1px solid rgba(255,255,255,0.05);">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap: wrap; gap: 10px;">
+                            <h3 id="interview-title" style="font-size:1.1rem; font-weight:700; color:var(--blue-light);"><i class="fas fa-file-alt"></i> استمارة التقييم ورصد الدرجات لايف</h3>
+                            <div style="background:#030712; padding:6px 15px; border-radius:10px; border:1px solid rgba(37, 99, 235, 0.3); font-weight:bold; color:#fff;" id="interview-timer-wrapper">
+                                زمن المقابلة الموصى به: <span id="interview-timer" style="color: #60a5fa;">00:00</span> / 20:00 دقيقة
+                            </div>
+                        </div>
+
+                        <div class="id-form-container" style="text-align:right;">
+                            <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 5px; font-weight: bold;">اسم المتقدم للمقابلة:</label>
+                            <input type="text" id="cand-name" placeholder="أدخل اسم الشخص المتقدم للجنة...">
+
+                            <div style="margin:20px 0; background:rgba(255,255,255,0.01); padding:15px; border-radius:10px; border:1px solid rgba(255,255,255,0.03);">
+                                <h4 style="font-size:0.95rem; margin-bottom:15px; color:#fff; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:8px;"><i class="fas fa-question-circle" style="color:var(--blue-light);"></i> أسئلة بنود التقييم الفني واللوائح الفنية بالكيان:</h4>
+                                <div id="questions-container"></div>
+                            </div>
+
+                            <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 5px; font-weight: bold;">ملاحظات وتوصيات المسؤول عن المقابلة:</label>
+                            <textarea id="cand-notes" rows="3" placeholder="اكتب تقييمك العام للمرشح ونقاط القوة والضعف والتعليق النهائي..."></textarea>
+
+                            <div style="display:flex; gap:12px; margin-top:15px;">
+                                <button onclick="submitInterviewData()" class="btn-verify-id" style="flex:1;">اعتماد ورصد نتيجة المقابلة سحابياً</button>
+                                <button onclick="cancelInterview()" class="btn-verify-id" style="background:rgba(239, 68, 68, 0.15); border:1px solid rgba(239, 68, 68, 0.2); color:#ef4444;">إلغاء وإغلاق الغرفة</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:30px; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px;">
+                        <h4 style="font-size:1rem; font-weight:700; margin-bottom:15px; text-align:right;"><i class="fas fa-server" style="color:var(--blue-light);"></i> جدول رصد وتجميع درجات نتائج المقابلات بالمنصة</h4>
+                        <div style="display:flex; gap:12px; margin-bottom:15px; flex-wrap:wrap;">
+                            <input type="text" id="search-cand-name" placeholder="🔍 بحث باسم المرشح..." class="id-form-container" style="flex:1; margin-bottom:0; min-width:200px;" oninput="filterInterviewTable()">
+                            <select id="filter-comm" class="id-form-container" style="width:200px; margin-bottom:0;" onchange="filterInterviewTable()">
+                                <option value="">كل اللجان والفرز</option>
+                                <option value="HR">لجنة الموارد البشرية HR</option>
+                                <option value="PR">لجنة العلاقات العامة PR</option>
+                                <option value="Media">لجنة السوشيال ميديا Media</option>
+                                <option value="Organization">لجنة التنظيم واللوجستيات</option>
+                                <option value="Projects">لجنة المشروعات والمبادرات</option>
+                                <option value="FR">لجنة التمويل والإدارة المالية</option>
+                                <option value="Coordinators">استمارة منسقين اللجان</option>
                             </select>
                         </div>
 
@@ -237,110 +275,191 @@
                             <table class="dashboard-table">
                                 <thead>
                                     <tr>
-                                        <th>الاسم الثلاثي</th>
-                                        <th>اللجنة</th>
-                                        <th>النسبة</th>
-                                        <th>الحالة</th>
+                                        <th>اسم المتقدم</th>
+                                        <th>اللجنة المستهدفة</th>
+                                        <th>زمن المقابلة</th>
+                                        <th>النسبة المئوية</th>
+                                        <th>حالة الفرز العام</th>
                                     </tr>
                                 </thead>
                                 <tbody id="interview-results-tbody">
                                     <tr>
-                                        <td>معاذ أحمد</td>
-                                        <td>IT Committee</td>
-                                        <td>95%</td>
-                                        <td><span class="status-badge accepted">مقبول</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>كريم محمود</td>
-                                        <td>Media</td>
-                                        <td>--</td>
-                                        <td><span class="status-badge pending">قيد المراجعة</span></td>
+                                        <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 15px;">في انتظار تحميل وتزامن البيانات السحابية بالكامل...</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                    </section>
+                    </div>
+                </section>
 
-                    <section id="interview-section" class="widget-panel-card">
-                        <div class="widget-header">
-                            <h4><i class="fas fa-user-check" style="color:var(--green-neon, #22c55e);"></i> نظام المقابلات الموحد</h4>
-                        </div>
-                        
-                        <div id="interview-main-menu">
-                            <div class="options-grid" style="display:grid; grid-template-columns: repeat(2, 1fr); gap:10px;">
-                                <button onclick="startInterview('IT')" class="btn-login">لجنة IT <i class="fas fa-chevron-left arrow-icon"></i></button>
-                                <button onclick="startInterview('HR')" class="btn-login">لجنة HR <i class="fas fa-chevron-left arrow-icon"></i></button>
-                                <button onclick="startInterview('PR')" class="btn-login">لجنة PR <i class="fas fa-chevron-left arrow-icon"></i></button>
-                                <button onclick="startInterview('Media')" class="btn-login">لجنة ميديا <i class="fas fa-chevron-left arrow-icon"></i></button>
+                <section id="admin-dashboard-section" class="dashboard-info-panel" style="display:block;">
+                    <div class="widget-header">
+                        <h4><i class="fas fa-sliders-h" style="color:#2563eb;"></i> بوابة النشر والتوثيق الميداني والأنشطة العامة المفتوحة بالكيان</h4>
+                    </div>
+
+                    <div class="dashboard-bottom-row">
+                        <section id="activities-section" class="widget-panel-card">
+                            <div class="widget-header">
+                                <h4><i class="fas fa-bolt" style="color:#2563eb;"></i> ساحة توثيق الأنشطة والمؤتمرات الميدانية الحية</h4>
                             </div>
-                        </div>
-
-                        <div id="interview-form-area" style="display:none; margin-top:15px;">
-                            <input type="text" id="cand-name" placeholder="اسم المتقدم الثلاثي" class="id-form-container" style="margin-bottom:10px;">
-                            <div id="questions-container" style="margin-bottom:10px;"></div>
-                            <textarea id="cand-notes" placeholder="ملاحظات وسلوك المتقدم..." class="id-form-container" style="height:60px; margin-bottom:10px;"></textarea>
-                            <button onclick="submitInterviewData()" class="btn-verify-id">حفظ ورصد النتيجة</button>
-                        </div>
-                    </section>
-
-                    <section id="workspace-section" class="widget-panel-card">
-                        <div class="widget-header">
-                            <h4><i class="fas fa-id-card-alt" style="color:var(--gold-light);"></i> بوابة كارنيهات الأعضاء</h4>
-                        </div>
-                        <div id="members-grid" class="dashboard-table-wrapper"></div>
-                        <div id="pagination-container"></div>
-                    </section>
-
-                    <section id="about-section" class="widget-panel-card" style="grid-column: 1 / -1;">
-                        <div class="widget-header">
-                            <h4><i class="fas fa-crown" style="color:var(--gold-light);"></i> الهيكل القيادي والتنفيذي للكيان</h4>
-                        </div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-                            <div class="exec-card" style="min-width: 200px;">
-                                <h4>أ/ محمد حازم</h4>
-                                <span>رئيس الكيان</span>
+                            <div id="activity-controls" style="display:block;">
+                                <textarea id="activity-text" rows="3" placeholder="اكتب تفاصيل ومخرجات الفعالية أو التدريب الميداني اليوم..." class="id-form-container" style="width: 100%; margin-bottom: 10px;"></select>
+                                <input type="file" id="activity-images" style="color:white; margin-bottom:10px; font-size:0.8rem;">
+                                <button onclick="postActivity()" class="btn-verify-id" style="width: 100%;">نشر الفعالية لايف على المنصة</button>
                             </div>
-                            <div class="exec-card" style="min-width: 200px;">
-                                <h4>أ/ يوسف عبد التواب</h4>
-                                <span>نائب رئيس الكيان</span>
+                            <div id="activities-container" style="margin-top:15px;"></div>
+                        </section>
+
+                        <section id="news-section" class="widget-panel-card">
+                            <div class="widget-header">
+                                <h4><i class="fas fa-rss" style="color:#2563eb;"></i> شريط الأخبار العاجلة والنشرات والتعميمات الإدارية</h4>
                             </div>
-                            <div class="exec-card" style="min-width: 200px;">
-                                <h4>أ/ سلمي ياسر</h4>
-                                <span>المدير التنفيذي</span>
+                            <div id="admin-controls" style="display:block;">
+                                <input type="text" id="news-input" placeholder="اكتب عنوان الخبر العاجل هنا لتحديث شريط التيكر..." class="id-form-container" style="width: 100%; margin-bottom: 10px;">
+                                <button onclick="postNews()" class="btn-verify-id" style="width: 100%;">نشر الخبر وتعميمه بالشريط العلوي</button>
                             </div>
-                        </div>
-                    </section>
+                            <div id="news-list" style="margin-top:15px;"></div>
+                        </section>
+                    </div>
+                </section>
 
-                    <section id="activities-section" class="widget-panel-card">
+                <div id="executive-live-sync-panel-zone" style="display: none; margin-top: 25px;">
+                    <div class="widget-panel-card">
                         <div class="widget-header">
-                            <h4><i class="fas fa-calendar-alt" style="color:var(--gold-light);"></i> إدارة الأنشطة والفعاليات</h4>
+                            <h4><i class="fas fa-sync" style="color: #a855f7;"></i> غرفة الرصد المركزي الموحد للأمانة العامة (المكتب التنفيذي فقط)</h4>
                         </div>
-                        <div id="admin-activity-controls" style="display:block;">
-                            <textarea id="activity-text" placeholder="اكتب وصفاً أو تغطية للنشاط..." class="id-form-container" style="height:60px;"></textarea>
-                            <input type="file" id="activity-images" style="color:white; margin-bottom:10px; font-size:0.8rem;">
-                            <button onclick="postActivity()" class="btn-verify-id">نشر الفعالية لايف</button>
+                        <div class="dashboard-table-wrapper" style="margin-top: 15px;">
+                            <table class="dashboard-table">
+                                <thead>
+                                    <tr>
+                                        <th>اسم الشخص المستهدف</th>
+                                        <th>اللجنة / النطاق الفني</th>
+                                        <th>درجة التقييم الفني</th>
+                                        <th>قرار الاعتماد القيادي</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="exec-interview-sync-tbody">
+                                    <tr>
+                                        <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 15px;">لا توجد بيانات واردة حالياً. في انتظار بدء اللجان للمقابلات الحية...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div id="activities-container" style="margin-top:15px;"></div>
-                    </section>
-
-                    <section id="news-section" class="widget-panel-card">
-                        <div class="widget-header">
-                            <h4><i class="fas fa-rss" style="color:var(--red-ministry);"></i> شريط الأخبار العاجلة</h4>
-                        </div>
-                        <div id="admin-controls" style="display:block;">
-                            <input type="text" id="news-input" placeholder="اكتب عنوان الخبر العاجل هنا..." class="id-form-container">
-                            <button onclick="postNews()" class="btn-verify-id" style="background:var(--blue-gradient);">نشر الخبر بالشريط</button>
-                        </div>
-                        <div id="news-list" style="margin-top:15px;"></div>
-                    </section>
-
+                    </div>
                 </div>
+
             </main>
         </div>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore-compat.js"></script>
+    
     <script src="script.js"></script>
+
+    <script>
+        function switchActiveLink(element) {
+            const links = document.querySelectorAll('.sidebar-link');
+            links.forEach(l => l.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // دالة مخصصة لتهيئة استمارة أسئلة المنسقين بشكل مباشر وتلقائي عند طلبها
+        window.initializeCoordinatorsFormLayout = function(container) {
+            const coorQuestions = [
+                { q: "السؤال الأول: كيف تتعامل مع عضو غير ملتزم أو متفاعل في فريقك؟", opts: ["توجيه تنبيه شفهي خاص أولاً وفقاً للائحة", "استبعاد المرشح مباشرة بدون الرجوع للـ Head", "تجاهل الأمر لعدم إحداث حساسية داخل الأمانة"], ans: 0 },
+                { q: "السؤال الثاني: ما هي المهارات الأساسية التي يجب أن تتوفر في المنسق الناجح بالكيان؟", opts: ["المهارات التقنية المعقدة فقط", "القيادة، التواصل الفعال، وحل النزاعات التنظيمية", "القدرة على تنفيذ الأوامر دون مناقشة"], ans: 1 },
+                { q: "السؤال الثالث: كيف تخطط لتوزيع المهام بعدالة بين أعضاء فريقك لضمان عدم الضغط؟", opts: ["توزيع المهام عشوائياً حسب الأسبقية للظهور", "دراسة كفاءة ووقت كل عضو وتوليه المهام تدريجياً", "إعتماد المهام الصعبة على الأعضاء القدامى فقط"], ans: 1 },
+                { q: "السؤال الرابع: ماذا تفعل لو تعارضت قراراتك كمنسق مع رؤية رئيس اللجنة (Head)؟", opts: ["عقد اجتماع لمناقشة وجهات النظر والوصول لحل توافقي", "التمسك برأيي وتطبيقه ميدانياً بشكل منفصل", "تقديم شكوى مباشرة للمكتب التنفيذي دون نقاش الـ Head"], ans: 0 }
+            ];
+
+            container.innerHTML = "";
+            coorQuestions.forEach((item, index) => {
+                const qBox = document.createElement("div");
+                qBox.className = "coor-question-box";
+                qBox.style.marginBottom = "20px";
+                qBox.style.padding = "12px";
+                qBox.style.background = "rgba(255,255,255,0.02)";
+                qBox.style.borderRadius = "8px";
+                qBox.style.borderRight = "4px solid #2563eb";
+                
+                const qTitle = document.createElement("h5");
+                qTitle.innerText = item.q;
+                qTitle.style.fontSize = "0.9rem";
+                qTitle.style.marginBottom = "10px";
+                qTitle.style.color = "#fff";
+                qBox.appendChild(qTitle);
+
+                item.opts.forEach((opt, optIndex) => {
+                    const optLabel = document.createElement("label");
+                    optLabel.style.display = "block";
+                    optLabel.style.fontSize = "0.82rem";
+                    optLabel.style.color = "var(--text-muted)";
+                    optLabel.style.cursor = "pointer";
+                    optLabel.style.marginBottom = "6px";
+                    optLabel.style.direction = "rtl";
+                    optLabel.style.textAlign = "right";
+                    
+                    const radio = document.createElement("input");
+                    radio.type = "radio";
+                    radio.name = `coor_q_${index}` nesting;
+                    radio.name = `coor_q_${index}`;
+                    radio.value = optIndex;
+                    radio.style.marginLeft = "8px";
+                    
+                    if (optIndex === item.ans) {
+                        optLabel.style.fontWeight = "bold";
+                        optLabel.title = "الإجابة النموذجية المعتمدة باللائحة";
+                    }
+                    
+                    optLabel.appendChild(radio);
+                    optLabel.appendChild(document.createTextNode(opt));
+                    qBox.appendChild(optLabel);
+                });
+                
+                container.appendChild(qBox);
+            });
+        }
+
+        const originalCancelInterview = window.cancelInterview;
+        window.cancelInterview = function() {
+            if(window.interviewTimerInterval) clearInterval(window.interviewTimerInterval);
+            if (typeof originalCancelInterview === 'function') {
+                originalCancelInterview();
+            } else {
+                document.getElementById('interview-main-menu').style.display = 'block';
+                document.getElementById('interview-form-area').style.display = 'none';
+            }
+        };
+
+        // ==========================================
+        // أنظمة أمان متطورة لحماية المحتوى ومنع السكرين شوت والطباعة بالكامل
+        // ==========================================
+        
+        // 1. منع زر الفأرة الأيمن بالكامل على الموقع
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // 2. منع الاختصارات البرمجية المخصصة للحفظ والطباعة وتصوير الشاشة
+        document.addEventListener('keydown', function(e) {
+            // منع Ctrl + C (النسخ)
+            if (e.ctrlKey && e.keyCode == 67) { e.preventDefault(); }
+            // منع Ctrl + S (الحفظ)
+            if (e.ctrlKey && e.keyCode == 83) { e.preventDefault(); }
+            // منع Ctrl + P (الطباعة واقتناص ملفات PDF)
+            if (e.ctrlKey && e.keyCode == 80) { e.preventDefault(); }
+            // منع زر F12 لتأمين الكود
+            if (e.keyCode == 123) { e.preventDefault(); }
+        });
+
+        // 3. كود حماية ذكي يحول الشاشة إلى شاشة سوداء تماماً أثناء محاولة الطباعة أو تصوير الشاشة عبر المتصفح
+        window.addEventListener('beforeprint', function() {
+            document.body.style.display = 'none';
+        });
+        window.addEventListener('afterprint', function() {
+            document.body.style.display = 'block';
+        });
+    </script>
 </body>
 </html>
