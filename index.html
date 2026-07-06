@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body class="dark-theme"> 
     <div class="top-news-bar">
@@ -202,13 +202,13 @@
 
                             <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 5px; font-weight: bold;">اللجنة أو الأمانة المستهدفة:</label>
                             <select id="id-input-committee" onchange="updateIDCard()">
-                                <option value="لجنة الموارد البشرية">لجنة الموارد البشرية (HR)</option>
+                                <option value="لجنة العلاقات المالية">لجنة العلاقات المالية (Financial)</option>
                                 <option value="لجنة العلاقات العامة">لجنة العلاقات العامة (PR)</option>
-                                <option value="لجنة السوشيال ميديا والمنصات">لجنة السوشيال ميديا والمنصات (Media)</option>
                                 <option value="لجنة التنظيم واللوجستيات">لجنة التنظيم واللوجستيات (Organization)</option>
+                                <option value="لجنة الموارد البشرية">لجنة الموارد البشرية (HR)</option>
+                                <option value="لجنة الميديا والسوشيال ميديا">لجنة الميديا والسوشيال ميديا (Media)</option>
                                 <option value="لجنة التدريب والتطوير">لجنة التدريب والتطوير (Training)</option>
                                 <option value="لجنة المشروعات والمبادرات">لجنة المشروعات والمبادرات (Projects)</option>
-                                <option value="لجنة إدارة العضوية والمالية">لجنة إدارة العضوية والمالية (Financial)</option>
                                 <option value="لجنة تكنولوجيا المعلومات">لجنة تكنولوجيا المعلومات (IT)</option>
                             </select>
 
@@ -236,7 +236,7 @@
                                     </div>
                                     <div class="id-card-user-info-text">
                                         <h3 id="card-display-name">إسم العضو الثلاثي</h3>
-                                        <p id="card-display-committee">لجنة الموارد البشرية</p>
+                                        <p id="card-display-committee">لجنة العلاقات المالية</p>
                                     </div>
                                 </div>
                                 <div class="id-card-bottom-footer-zone">
@@ -258,12 +258,13 @@
                     <div id="interview-main-menu" style="display:block; margin-top:15px;">
                         <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:15px; text-align:right;">اختر اللجنة المستهدفة لإطلاق استمارة المقابلة الشخصية وتفعيل العداد الإلكتروني والبدء في تقييم المرشح فوراً:</p>
                         <div class="options-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:12px;">
-                            <button class="btn-login" onclick="startInterview('HR')"><i class="fas fa-users-cog"></i> الموارد البشرية HR</button>
+                            <button class="btn-login" onclick="startInterview('FR')"><i class="fas fa-donate"></i> العلاقات المالية Financial</button>
                             <button class="btn-login" onclick="startInterview('PR')"><i class="fas fa-handshake"></i> العلاقات العامة PR</button>
-                            <button class="btn-login" onclick="startInterview('Media')"><i class="fas fa-photo-video"></i> السوشيال ميديا Media</button>
                             <button class="btn-login" onclick="startInterview('Organization')"><i class="fas fa-cubes"></i> التنظيم واللوجستيات</button>
+                            <button class="btn-login" onclick="startInterview('HR')"><i class="fas fa-users-cog"></i> الموارد البشرية HR</button>
+                            <button class="btn-login" onclick="startInterview('Media')"><i class="fas fa-photo-video"></i> السوشيال ميديا Media</button>
+                            <button class="btn-login" onclick="startInterview('Training')"><i class="fas fa-graduation-cap"></i> التدريب والتطوير</button>
                             <button class="btn-login" onclick="startInterview('Projects')"><i class="fas fa-project-diagram"></i> المشروعات والمبادرات</button>
-                            <button class="btn-login" onclick="startInterview('FR')"><i class="fas fa-donate"></i> التمويل والإدارة المالية</button>
                             <button class="btn-login" onclick="startInterview('IT')"><i class="fas fa-laptop-code"></i> تكنولوجيا المعلومات IT</button>
                             <button class="btn-login" onclick="startInterview('Coordinators')"><i class="fas fa-user-shield"></i> استمارة منسقين اللجان</button>
                         </div>
@@ -379,9 +380,9 @@
         </div>
     </div>
 
+    <!-- استدعاء سكريبتات الأنظمة والمكتبات التوافقية بالترتيب الصحيح لعدم تعطيل الأزرار -->
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore-compat.js"></script>
-    <script src="style.css"></script>
     <script src="script.js"></script>
     <script>
         const originalCancelInterview = window.cancelInterview;

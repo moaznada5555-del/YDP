@@ -24,48 +24,50 @@
 
 body.dark-theme {
     background-color: var(--bg-dark);
-    background-image: 
-        radial-gradient(circle at 50% 10%, rgba(37, 99, 235, 0.12), transparent 45%),
-        radial-gradient(circle at 10% 80%, rgba(96, 165, 250, 0.05), transparent 35%);
+    background-image: \r
+        radial-gradient(circle at 50% 10%, rgba(37, 99, 235, 0.12), transparent 45%),\r
+        radial-gradient(circle at 15% 60%, rgba(96, 165, 250, 0.05), transparent 30%);
     background-attachment: fixed;
     color: var(--text-white);
-    min-height: 100vh;
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
 /* ==========================================
-   2. شريط الأخبار المتحرك (Ticker Bar)
+   2. شريط الأخبار العاجلة العلوي (Top Ticker Bar)
    ========================================== */
 .top-news-bar {
-    background: #030712;
-    border-bottom: 1px solid rgba(37, 99, 235, 0.2);
-    height: 35px;
+    background: linear-gradient(90deg, #1e3a8a, #0f172a, #1e3a8a);
+    color: #f8fafc;
+    height: 34px;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
     overflow: hidden;
     position: fixed;
     top: 0;
-    width: 100%;
+    left: 0;
+    right: 0;
     z-index: 2000;
 }
 
 .ticker-text {
     display: inline-block;
     white-space: nowrap;
-    padding-right: 100%;
-    animation: tickerAnimation 25s linear infinite;
-    color: var(--blue-light);
-    font-size: 0.85rem;
-    font-weight: 600;
+    padding-left: 100%;
+    animation: marquee-ticker 28s linear infinite;
+    font-size: 0.82rem;
+    font-weight: 700;
 }
 
-@keyframes tickerAnimation {
+@keyframes marquee-ticker {
     0% { transform: translate3d(0, 0, 0); }
-    100% { transform: translate3d(100%, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
 }
 
 /* ==========================================
-   3. بوابة الدخول واختيار النطاق (Login UI)
+   3. بوابات التسجيل والتحقق (Secure Overlay)
    ========================================== */
 .overlay {
     position: fixed;
@@ -73,8 +75,8 @@ body.dark-theme {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(3, 7, 18, 0.95);
-    backdrop-filter: blur(10px);
+    background: rgba(4, 7, 12, 0.95);
+    backdrop-filter: blur(15px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,659 +85,484 @@ body.dark-theme {
 
 .login-card {
     background: var(--bg-card);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: var(--card-shadow);
-    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-glow);
+    box-shadow: var(--card-shadow), 0 0 40px rgba(37, 99, 235, 0.15);
+    border-radius: 16px;
     padding: 35px;
-    border-radius: 24px;
     width: 90%;
-    max-width: 600px;
+    max-width: 520px;
     text-align: center;
-    position: relative;
-    overflow: hidden;
 }
 
-.login-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
-    pointer-events: none;
-}
-
-.welcome-text {
-    font-size: 1.6rem;
-    font-weight: 800;
-    margin-bottom: 8px;
-}
-
-.highlight {
-    background: var(--blue-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.sub-text {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin-bottom: 30px;
-}
-
-.dashboard-router-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.btn-visitor-router {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-visitor-router:hover {
-    background: rgba(37, 99, 235, 0.1);
-    border-color: var(--blue-neon);
-    transform: translateY(-2px);
-}
-
-.visitor-right-side {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    text-align: right;
-}
-
-.router-icon-circle {
-    width: 45px;
-    height: 45px;
-    background: rgba(37, 99, 235, 0.15);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.login-icon {
+    font-size: 3rem;
     color: var(--blue-light);
-    font-size: 1.2rem;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.4));
 }
 
-.router-text-side h3 {
-    font-size: 1rem;
-    font-weight: 700;
+.login-header h2 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    font-weight: 800;
 }
 
-.router-text-side p {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-}
-
-.router-arrow-bottom {
-    color: var(--text-muted);
-}
-
-.separator-text {
+.login-header p {
     color: var(--text-muted);
     font-size: 0.85rem;
-    position: relative;
-    margin: 15px 0;
+    margin-bottom: 25px;
 }
 
-.sections-router-grid {
+.options-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     gap: 12px;
 }
 
-.section-router-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    padding: 15px 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.section-router-card:hover {
-    background: rgba(37, 99, 235, 0.08);
-    border-color: rgba(37, 99, 235, 0.4);
-    transform: translateY(-3px);
-}
-
-.router-card-img-box {
-    font-size: 1.5rem;
-    color: var(--blue-light);
-    margin-bottom: 8px;
-}
-
-.section-router-card h4 {
-    font-size: 0.9rem;
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-
-.section-router-card p {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-}
-
-/* ==========================================
-   4. الهيكل والتوزيع الرئيسي للوحة (Layout)
-   ========================================== */
-.dashboard-layout {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    padding-top: 35px;
-}
-
-.main-header {
-    background: rgba(10, 17, 28, 0.8);
-    backdrop-filter: var(--glass-blur);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    position: fixed;
-    top: 35px;
+.btn-login-opt {
     width: 100%;
-    height: 70px;
-    z-index: 1000;
-}
-
-.nav-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-}
-
-.logo-area {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.logo-area img {
-    height: 45px;
-    width: 45px;
-    object-fit: contain;
-}
-
-.brand-name h2 {
-    font-size: 1.05rem;
-    font-weight: 800;
-}
-
-.brand-name span {
-    font-size: 0.78rem;
-    color: var(--blue-light);
-    font-weight: 600;
-}
-
-.logout-btn {
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.2);
-    color: #ef4444;
-    padding: 8px 16px;
-    border-radius: 10px;
-    font-size: 0.85rem;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.02);
+    color: white;
     font-weight: 700;
+    font-size: 0.95rem;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     transition: all 0.3s ease;
 }
 
-.logout-btn:hover {
-    background: #ef4444;
-    color: #fff;
+.btn-login-opt:hover {
+    background: var(--blue-gradient);
+    border-color: var(--blue-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
 }
 
 /* ==========================================
-   5. شريط التنقل الجانبي الثابت (Sticky Sidebar)
+   4. الهيكل الرئيسي للوحة القيادة (Dashboard Layout)
    ========================================== */
-.dashboard-body {
+.dashboard-container {
     display: flex;
-    flex: 1;
-    margin-top: 70px;
+    min-height: 100vh;
+    padding-top: 34px; /* لترك مساحة لشريط التمرير العلوي المخصص للأخبار */
 }
 
 .dashboard-sidebar {
     width: 260px;
-    background: rgba(16, 28, 48, 0.4);
+    background: #060b13;
     border-left: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 25px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: fixed;
+    top: 34px;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 15px;
+}
+
+.sidebar-brand i {
+    color: var(--blue-light);
+}
+
+.sidebar-menu {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    position: fixed;
-    top: 105px;
-    right: 0;
-    bottom: 0;
-    z-index: 900;
+    width: 100%;
 }
 
 .sidebar-link {
     display: flex;
     align-items: center;
     gap: 12px;
+    padding: 12px 15px;
     color: var(--text-muted);
     text-decoration: none;
-    padding: 14px 18px;
-    border-radius: 12px;
-    font-size: 0.92rem;
     font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 8px;
     transition: all 0.25s ease;
 }
 
-.sidebar-link i {
-    font-size: 1.1rem;
-    width: 20px;
-    text-align: center;
-}
-
-.sidebar-link:hover {
-    background: rgba(255, 255, 255, 0.02);
-    color: var(--text-white);
+.sidebar-link:hover, .sidebar-link.active {
+    background: rgba(37, 99, 235, 0.1);
+    color: white;
 }
 
 .sidebar-link.active {
-    background: rgba(37, 99, 235, 0.1);
-    color: var(--blue-light);
     border-right: 4px solid var(--blue-neon);
-    border-radius: 0 12px 12px 0;
-    font-weight: 700;
-}
-
-/* محتوى لوحة التحكم الرئيسي */
-.dashboard-main-content {
-    flex: 1;
-    margin-right: 260px;
-    padding: 30px;
-    max-width: 1200px;
-}
-
-/* ==========================================
-   6. المكونات والبطاقات البرمجية (Widgets)
-   ========================================== */
-.dashboard-welcome-banner {
-    background: linear-gradient(135deg, rgba(29, 78, 216, 0.15) 0%, rgba(96, 165, 250, 0.03) 100%);
-    border: 1px solid rgba(37, 99, 235, 0.2);
-    padding: 30px;
-    border-radius: 20px;
-    margin-bottom: 30px;
-    text-align: right;
-}
-
-.dashboard-welcome-banner h2 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    margin-bottom: 10px;
-}
-
-.dashboard-welcome-banner p {
-    color: var(--text-muted);
-    font-size: 0.92rem;
-    line-height: 1.6;
-}
-
-.services-neon-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.service-neon-card {
-    background: var(--bg-card);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 25px;
-    text-align: right;
-    box-shadow: var(--card-shadow);
-    backdrop-filter: var(--glass-blur);
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-.service-neon-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(37, 99, 235, 0.3);
-    box-shadow: 0 12px 40px 0 rgba(37, 99, 235, 0.1);
-}
-
-.neon-icon-wrapper {
-    width: 50px;
-    height: 50px;
     background: rgba(37, 99, 235, 0.15);
-    border-radius: 12px;
+}
+
+.dashboard-main-wrapper {
+    flex: 1;
+    margin-right: 260px; /* دفع المحتوى لليسار ليتفادى غطاء السايدبار الأيمن */
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.dashboard-header {
+    background: rgba(10, 17, 28, 0.6);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 34px;
+    z-index: 900;
+}
+
+.header-user-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-avatar-placeholder {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--blue-gradient);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.4rem;
-    color: var(--blue-light);
-    margin-bottom: 18px;
+    color: white;
+    font-size: 1rem;
 }
 
-.service-neon-card h3 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-}
-
-.service-neon-card p {
-    color: var(--text-muted);
-    font-size: 0.88rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-.btn-neon-action {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: var(--text-white);
-    padding: 8px 16px;
-    border-radius: 10px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-neon-action:hover {
-    background: var(--blue-gradient);
-    border-color: transparent;
+.dashboard-main-content {
+    padding: 30px;
+    flex: 1;
 }
 
 /* ==========================================
-   7. حاويات الأقسام والاستمارات (Forms & Panels)
+   5. المكونات الذكية (Cards, Grids & UI Components)
    ========================================== */
-.dashboard-info-panel {
-    background: var(--bg-card);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
-    padding: 30px;
-    box-shadow: var(--card-shadow);
-    backdrop-filter: var(--glass-blur);
-    margin-bottom: 30px;
-}
-
-.widget-header {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding-bottom: 15px;
+.section-title {
+    font-size: 1.15rem;
+    font-weight: 800;
     margin-bottom: 20px;
-    text-align: right;
-}
-
-.widget-header h4 {
-    font-size: 1.1rem;
-    font-weight: 700;
+    color: white;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.id-form-container input, .id-form-container select, .id-form-container textarea {
-    width: 100%;
-    background: #060b13;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 12px 16px;
+.section-title i {
+    color: var(--blue-light);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.03);
     border-radius: 12px;
-    color: #fff;
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-    outline: none;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
     transition: all 0.3s ease;
 }
 
-.id-form-container input:focus, .id-form-container select:focus, .id-form-container textarea:focus {
-    border-color: var(--blue-neon);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+.stat-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-glow);
+    box-shadow: var(--card-shadow);
+}
+
+.card-icon {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: 1.8rem;
+    color: var(--blue-light);
+    opacity: 0.8;
+}
+
+.stat-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: white;
+}
+
+.stat-card p {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.dashboard-bottom-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 25px;
+}
+
+.info-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+    padding: 25px;
+}
+
+.id-form-container {
+    background: #0d1621;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: white;
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.25s ease;
+}
+
+.id-form-container:focus {
+    border-color: var(--blue-light);
 }
 
 .btn-verify-id {
     background: var(--blue-gradient);
+    color: white;
     border: none;
-    color: #fff;
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-size: 0.92rem;
+    padding: 11px 20px;
     font-weight: 700;
+    border-radius: 6px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .btn-verify-id:hover {
+    opacity: 0.9;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.form-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    margin-bottom: 6px;
 }
 
 /* ==========================================
-   8. كارت الهوية الرقمي المشفر (YDP ID Card)
+   6. جداول البيانات الذكية (Data Tables UI)
    ========================================== */
-.ydp-digital-id-card {
-    width: 340px;
-    height: 490px;
-    background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
-    border: 2px solid #3b82f6;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-    border-radius: 18px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
+.table-container {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.03);
+    border-radius: 12px;
     overflow: hidden;
 }
 
-.ydp-digital-id-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
+table {
     width: 100%;
-    height: 100%;
-    background-image: radial-gradient(circle, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
-    background-size: 12px 12px;
-    pointer-events: none;
-}
-
-.id-card-top-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-bottom: 1px solid rgba(59, 130, 246, 0.3);
-    padding-bottom: 12px;
-}
-
-.card-top-logo {
-    width: 45px;
-    height: 45px;
-    object-fit: contain;
-}
-
-.card-header-titles {
+    border-collapse: collapse;
     text-align: right;
 }
 
-.card-header-titles h1 {
-    font-size: 0.72rem;
-    font-weight: 800;
-    color: #fff;
+th, td {
+    padding: 14px 18px;
+    font-size: 0.85rem;
 }
 
-.card-header-titles h2 {
-    font-size: 0.58rem;
+th {
+    background: rgba(0,0,0,0.2);
     color: #94a3b8;
-    margin-top: 2px;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.id-card-body-content {
+td {
+    color: #e2e8f0;
+    border-bottom: 1px solid rgba(255,255,255,0.02);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.status-badge.accepted {
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+}
+
+.status-badge.rejected {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+}
+
+.status-badge.pending {
+    background: rgba(234, 179, 8, 0.15);
+    color: #fde047;
+}
+
+/* ==========================================
+   7. محاكي الكارنيه الرقمي (ID Card Canvas Core)
+   ========================================== */
+.id-card-canvas {
+    width: 320px;
+    height: 460px;
+    background: linear-gradient(145deg, #0d192b, #070d16);
+    border: 1px solid rgba(255, 136, 0, 0.25); /* إطار ذهبي مضيء وجذاب */
+    border-radius: 18px;
+    padding: 22px;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 30px rgba(255, 136, 0, 0.08);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 15px 0;
-}
-
-.id-card-photo-frame {
-    width: 125px;
-    height: 155px;
-    border: 2px solid #3b82f6;
-    border-radius: 12px;
+    justify-content: space-between;
     overflow: hidden;
-    background: #020617;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-    margin-bottom: 12px;
 }
 
-.id-card-photo-frame img {
+.id-card-top-glow {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 160px;
+    height: 160px;
+    background: radial-gradient(circle, rgba(255, 136, 0, 0.15), transparent 70%);
+    pointer-events: none;
+}
+
+.id-card-header-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding-bottom: 12px;
+}
+
+.id-card-logo-badge {
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(135deg, #ff8800, #ffaa44);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #060b13;
+    font-size: 1.1rem;
+}
+
+.id-card-avatar-wrapper {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 20px auto 15px auto;
+    border: 3px solid #ff8800;
+    box-shadow: 0 0 20px rgba(255, 136, 0, 0.2);
+    overflow: hidden;
+    background: #111e2e;
+}
+
+.id-card-avatar-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.id-card-user-info-text {
+.id-card-user-info {
     text-align: center;
+    margin-bottom: 20px;
 }
 
-.id-card-user-info-text h3 {
+.id-card-user-info h3 {
     font-size: 1.15rem;
     font-weight: 800;
-    color: #fff;
+    color: white;
+    margin-bottom: 4px;
 }
 
-.id-card-user-info-text p {
-    font-size: 0.82rem;
-    color: #3b82f6;
+.id-card-user-info p {
+    font-size: 0.8rem;
+    color: #ffaa44;
     font-weight: 700;
-    margin-top: 4px;
-    background: rgba(59, 130, 246, 0.1);
-    padding: 2px 12px;
-    border-radius: 20px;
-    display: inline-block;
 }
 
-.id-card-bottom-footer-zone {
+.id-card-footer-structure {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.03);
+    border-radius: 10px;
+    padding: 10px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    padding-top: 12px;
+    align-items: center;
 }
 
-.id-qrcode-box {
-    background: #fff;
+.qrcode-zone {
+    width: 65px;
+    height: 65px;
+    background: white;
     padding: 4px;
-    border-radius: 6px;
+    border-radius: 4px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.footer-stamp-box-text {
-    text-align: left;
-}
-
-.footer-stamp-box-text .stamp-title {
-    display: block;
-    font-size: 0.65rem;
-    color: #94a3b8;
-    font-weight: bold;
-}
-
-.footer-stamp-box-text .stamp-year {
-    display: block;
-    font-size: 0.75rem;
-    color: #22c55e;
-    font-weight: 800;
+.verified-pill-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-top: 4px;
 }
 
 /* ==========================================
-   9. جداول رصد البيانات (Data Tables)
-   ========================================== */
-.dashboard-table-wrapper {
-    overflow-x: auto;
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.dashboard-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: right;
-    font-size: 0.9rem;
-}
-
-.dashboard-table th {
-    background: #101c30;
-    padding: 14px 16px;
-    color: var(--text-white);
-    font-weight: 700;
-}
-
-.dashboard-table td {
-    padding: 14px 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    color: #cbd5e1;
-}
-
-.dashboard-table tr:last-child td {
-    border-bottom: none;
-}
-
-.status-badge {
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    display: inline-block;
-}
-
-.status-badge.accepted { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
-.status-badge.rejected { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
-.status-badge.pending { background: rgba(234, 179, 8, 0.15); color: #eab308; }
-
-.dashboard-bottom-row {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 20px;
-}
-
-.widget-panel-card {
-    background: var(--bg-card);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: var(--card-shadow);
-}
-
-.exec-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 15px;
-    border-radius: 12px;
-    text-align: center;
-}
-
-.exec-card h4 { font-size: 0.95rem; font-weight: 700; color: #fff; }
-.exec-card span { font-size: 0.75rem; color: var(--text-muted); }
-
-/* ==========================================
-   10. شاشات التكيف والتجاوب (Responsive / Media Queries)
+   8. قواعد التجاوب والملائمة للموبايل (Responsive Layout)
    ========================================== */
 @media (max-width: 1024px) {
     .dashboard-sidebar {
         width: 70px;
         padding: 20px 5px;
     }
-    .sidebar-link span {
+    .sidebar-link span, .sidebar-brand span {
         display: none;
     }
     .sidebar-link {
@@ -751,7 +578,6 @@ body.dark-theme {
 }
 
 @media (max-width: 768px) {
-    /* تهيئة الحاوية الأساسية لتفادي تداخل العناصر على شاشة الموبايل */
     .dashboard-body {
         flex-direction: column;
     }
@@ -793,16 +619,11 @@ body.dark-theme {
         width: 100%;
     }
     
-    .sections-router-grid {
-        grid-template-columns: 1fr;
+    .dashboard-main-wrapper {
+        margin-right: 0 !important;
     }
-}
-
-/* ==========================================
-   11. حماية الطباعة واقتناص السكرين شوت (Print Styles Shield)
-   ========================================== */
-@media print {
-    body, html, .dashboard-layout, .dashboard-main-content, .login-card, .overlay {
-        display: none !important;
+    
+    .dashboard-header {
+        padding: 10px 15px;
     }
 }
