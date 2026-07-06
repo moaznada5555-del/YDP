@@ -26,7 +26,7 @@ window.interviewTimerInterval = null;
 window.interviewSeconds = 0;
 
 // ==========================================
-// 2. المصفوفات وبنك الأسئلة وهيكل الكيان (بدون أي حذف)
+// 2. Matrices, Question Bank & Structure (No omissions)
 // ==========================================
 const committeeQuestions = {
     "IT": [
@@ -36,10 +36,10 @@ const committeeQuestions = {
         "اشرح الفرق بين position: absolute و position: relative.",
         "ما هو الـ Flexbox وكيف نوسط عنصراً في منتصف الشاشة؟"
     ],
-    "HR": ["هل لديك مهارة حل النزاعات؟", "هل سبق لك إجراء مقابلات؟", "هل تلتزم بالسرية التامة؟", "كيف تتعامل مع عضو غير ملتزم؟"],
+    "HR": ["هل لديك مهارة حل النزاعات؟", "هل سبق لك إجراء مقابلات؟", "هل تلتزم بالسرية التامة？", "كيف تتعامل مع عضو غير ملتزم؟"],
     "PR": ["كيف تقنع شريكاً برعاية فعاليتنا؟", "ماذا تفعل لو حدث خطأ بروتوكولي أثناء فعالية؟", "كيف تبني علاقة قوية مع الجهات الخارجية؟"],
     "Media": ["ما هي البرامج والبرمجيات التي تجيد استخدامها في التصميم أو المونتاج؟", "كيف تتعامل مع ضغط الوقت عند طلب تصاميم عاجلة لفعالية قائمة؟"],
-    "Organization": ["كيف تتعامل مع الأعداد الكبيرة للمشاركين أثناء تنظيم طابور الدخول أو الفعاليات？", "إذا حدث نقص طارئ في التجهيزات واللوجستيات قبل المؤتمر بساعة، كيف تتصرف؟"],
+    "Organization": ["كيف تتعامل مع الأعداد الكبيرة للمشاركين أثناء تنظيم طابور الدخول أو الفعاليات؟", "إذا حدث نقص طارئ في التجهيزات واللوجستيات قبل المؤتمر بساعة، كيف تتصرف؟"],
     "FR": ["ما هو الفارق الأساسي بين إدارة المشروعات والمبادرات الشبابية؟", "كيف تضع ميزانية مرنة ودراسة جدوى مالية لحدث ضخم طارئ؟"],
     "Projects": ["كيف تضع خطة تشغيلية مبتكرة لمبادرة شبابية تخدم رؤية الكيان؟", "كيف تقيس مدى نجاح وتأثير مشروع قائم على الأرض؟"],
     
@@ -191,6 +191,40 @@ function startInterview(comm) {
     document.getElementById('interview-main-menu').style.display = 'none';
     document.getElementById('interview-form-area').style.display = 'block';
     
+    // تحديث عنوان الغرفة والربط التلقائي والذكي لخانة وصف اللجان
+    const titleEl = document.getElementById('interview-title');
+    const descEl = document.getElementById('committee-desc-display');
+    
+    let committeeMappedName = "";
+    if (comm === "HR") committeeMappedName = "الموارد البشرية";
+    else if (comm === "PR") committeeMappedName = "العلاقات العامة";
+    else if (comm === "Media") committeeMappedName = "السوشيال ميديا والمنصات";
+    else if (comm === "Organization") committeeMappedName = "التنظيم واللوجستيات";
+    else if (comm === "Projects") committeeMappedName = "المشروعات والمبادرات";
+    else if (comm === "FR") committeeMappedName = "التمويل والإدارة المالية";
+    else if (comm === "Coordinators") committeeMappedName = "منسقين اللجان";
+
+    if (titleEl) {
+        titleEl.innerHTML = `<i class="fas fa-file-alt"></i> استمارة تقييم لجنة: ${committeeMappedName || comm}`;
+    }
+
+    if (descEl) {
+        const foundDesc = committeeDesc.find(d => d.title === committeeMappedName);
+        if (foundDesc) {
+            descEl.innerText = `🎯 مخرجات ووصف اللجنة: ${foundDesc.text}`;
+            descEl.style.display = 'block';
+        } else {
+            if (comm === "Coordinators") {
+                descEl.innerText = "🎯 تقييم المهارات القيادية والإدارية للمتقدمين على مناصب التنسيق الميداني والركزي.";
+            } else if (comm === "FR") {
+                descEl.innerText = "🎯 إدارة الميزانيات، الموارد المالية للفعاليات، وعمليات التمويل والدعم المستدام.";
+            } else {
+                descEl.innerText = "🎯 استمارة التقييم ورصد الدرجات لايف للجان كيان YDP الموحد لعام 2026.";
+            }
+            descEl.style.display = 'block';
+        }
+    }
+
     const container = document.getElementById('questions-container');
     
     // التحقق ما إذا كانت الاستمارة المطلوبة هي استمارة المنسقين لتشغيل الواجهة المخصصة لها

@@ -115,7 +115,6 @@ body.dark-theme {
 .highlight {
     background: var(--blue-gradient);
     -webkit-background-clip: text;
-    -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -795,10 +794,6 @@ body.dark-theme {
     }
     
     .sections-router-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .dashboard-bottom-row {
         grid-template-columns: 1fr;
     }
 }

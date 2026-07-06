@@ -71,7 +71,7 @@
         <header class="main-header">
             <div class="nav-container">
                 <div class="logo-area">
-                    <img src="https://verification-system-ydp.vercel.app/images/ydp-logo.png" alt="Logo">
+                    <img src="https://verification-system-ydp.vercel.app/images/ydp-logo.png" alt="Logo" style="width: 45px; height: 45px; object-fit: contain; margin-left: 10px; display: block !important;">
                     <div class="brand-name">
                         <h2>منصة YDP الإدارية الذكية</h2>
                         <span id="user-role-display">نطاق الوصول: زائر بالمنصة</span>
@@ -232,7 +232,10 @@
 
                     <div id="interview-form-area" style="display:none; margin-top:20px; background:rgba(0,0,0,0.2); padding:20px; border-radius:15px; border:1px solid rgba(255,255,255,0.05);">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap: wrap; gap: 10px;">
-                            <h3 id="interview-title" style="font-size:1.1rem; font-weight:700; color:var(--blue-light);"><i class="fas fa-file-alt"></i> استمارة التقييم ورصد الدرجات لايف</h3>
+                            <div style="text-align: right;">
+                                <h3 id="interview-title" style="font-size:1.1rem; font-weight:700; color:var(--blue-light); margin-bottom: 5px;"><i class="fas fa-file-alt"></i> استمارة التقييم ورصد الدرجات لايف</h3>
+                                <p id="committee-desc-display" style="font-size:0.85rem; color:var(--text-muted); font-family:'Cairo'; margin-right: 5px;"></p>
+                            </div>
                             <div style="background:#030712; padding:6px 15px; border-radius:10px; border:1px solid rgba(37, 99, 235, 0.3); font-weight:bold; color:#fff;" id="interview-timer-wrapper">
                                 زمن المقابلة الموصى به: <span id="interview-timer" style="color: #60a5fa;">00:00</span> / 20:00 دقيقة
                             </div>
@@ -249,7 +252,6 @@
 
                             <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 5px; font-weight: bold;">ملاحظات وتوصيات المسؤول عن المقابلة:</label>
                             <textarea id="cand-notes" rows="3" placeholder="اكتب تقييمك العام للمرشح ونقاط القوة والضعف والتعليق النهائي..."></textarea>
-
                             <div style="display:flex; gap:12px; margin-top:15px;">
                                 <button onclick="submitInterviewData()" class="btn-verify-id" style="flex:1;">اعتماد ورصد نتيجة المقابلة سحابياً</button>
                                 <button onclick="cancelInterview()" class="btn-verify-id" style="background:rgba(239, 68, 68, 0.15); border:1px solid rgba(239, 68, 68, 0.2); color:#ef4444;">إلغاء وإغلاق الغرفة</button>
@@ -272,7 +274,6 @@
                                 <option value="Coordinators">استمارة منسقين اللجان</option>
                             </select>
                         </div>
-
                         <div class="dashboard-table-wrapper">
                             <table class="dashboard-table">
                                 <thead>
@@ -298,7 +299,6 @@
                     <div class="widget-header">
                         <h4><i class="fas fa-sliders-h" style="color:#2563eb;"></i> بوابة النشر والتوثيق الميداني والأنشطة العامة المفتوحة بالكيان</h4>
                     </div>
-
                     <div class="dashboard-bottom-row">
                         <section id="activities-section" class="widget-panel-card">
                             <div class="widget-header">
@@ -314,114 +314,25 @@
 
                         <section id="news-section" class="widget-panel-card">
                             <div class="widget-header">
-                                <h4><i class="fas fa-rss" style="color:#2563eb;"></i> شريط الأخبار العاجلة والنشرات والتعميمات الإدارية</h4>
+                                <h4><i class="fas fa-rss" style="color:#ff8800;"></i> شريط الأخبار العاجلة والنشرات</h4>
                             </div>
                             <div id="admin-controls" style="display:block;">
-                                <input type="text" id="news-input" placeholder="اكتب عنوان الخبر العاجل هنا لتحديث شريط التيكر..." class="id-form-container" style="width: 100%; margin-bottom: 10px;">
-                                <button onclick="postNews()" class="btn-verify-id" style="width: 100%;">نشر الخبر وتعميمه بالشريط العلوي</button>
+                                <input type="text" id="news-input" placeholder="اكتب عنوان الخبر العاجل هنا..." class="id-form-container" style="width: 100%; margin-bottom: 10px;">
+                                <button onclick="postNews()" class="btn-verify-id" style="width: 100%;">نشر الخبر بالشريط العلوي</button>
                             </div>
                             <div id="news-list" style="margin-top:15px;"></div>
                         </section>
                     </div>
-                </section>
-
-                <div id="executive-live-sync-panel-zone" style="display: none; margin-top: 25px;">
-                    <div class="widget-panel-card">
-                        <div class="widget-header">
-                            <h4><i class="fas fa-sync" style="color: #a855f7;"></i> غرفة الرصد المركزي الموحد للأمانة العامة (المكتب التنفيذي فقط)</h4>
-                        </div>
-                        <div class="dashboard-table-wrapper" style="margin-top: 15px;">
-                            <table class="dashboard-table">
-                                <thead>
-                                    <tr>
-                                        <th>اسم الشخص المستهدف</th>
-                                        <th>اللجنة / النطاق الفني</th>
-                                        <th>درجة التقييم الفني</th>
-                                        <th>قرار الاعتماد القيادي</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="exec-interview-sync-tbody">
-                                    <tr>
-                                        <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 15px;">لا توجد بيانات واردة حالياً. في انتظار بدء اللجان للمقابلات الحية...</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            </main>
+                </main>
+            </div>
         </div>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore-compat.js"></script>
-    
+    <script src="style.css"></script>
     <script src="script.js"></script>
-
     <script>
-        function switchActiveLink(element) {
-            const links = document.querySelectorAll('.sidebar-link');
-            links.forEach(l => l.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        // دالة مخصصة لتهيئة استمارة أسئلة المنسقين بشكل مباشر وتلقائي عند طلبها
-        window.initializeCoordinatorsFormLayout = function(container) {
-            const coorQuestions = [
-                { q: "السؤال الأول: كيف تتعامل مع عضو غير ملتزم أو متفاعل في فريقك؟", opts: ["توجيه تنبيه شفهي خاص أولاً وفقاً للائحة", "استبعاد المرشح مباشرة بدون الرجوع للـ Head", "تجاهل الأمر لعدم إحداث حساسية داخل الأمانة"], ans: 0 },
-                { q: "السؤال الثاني: ما هي المهارات الأساسية التي يجب أن تتوفر في المنسق الناجح بالكيان? ", opts: ["المهارات التقنية المعقدة فقط", "القيادة، التواصل الفعال، وحل النزاعات التنظيمية", "القدرة على تنفيذ الأوامر دون مناقشة"], ans: 1 },
-                { q: "السؤال الثالث: كيف تخطط لتوزيع المهام بعدالة بين أعضاء فريقك لضمان عدم الضغط؟", opts: ["توزيع المهام عشوائياً حسب الأسبقية للظهور", "دراسة كفاءة ووقت كل عضو وتوليه المهام تدريجياً", "إعتماد المهام الصعبة على الأعضاء القدامى فقط"], ans: 1 },
-                { q: "السؤال الرابع: ماذا تفعل لو تعارضت قراراتك كمنسق مع رؤية رئيس اللجنة (Head)؟", opts: ["عقد اجتماع لمناقشة وجهات النظر والوصول لحل توافقي", "التمسك برأيي وتطبيقه ميدانياً بشكل منفصل", "تقديم شكوى مباشرة للمكتب التنفيذي دون نقاش الـ Head"], ans: 0 }
-            ];
-
-            container.innerHTML = "";
-            coorQuestions.forEach((item, index) => {
-                const qBox = document.createElement("div");
-                qBox.className = "coor-question-box";
-                qBox.style.marginBottom = "20px";
-                qBox.style.padding = "12px";
-                qBox.style.background = "rgba(255,255,255,0.02)";
-                qBox.style.borderRadius = "8px";
-                qBox.style.borderRight = "4px solid #2563eb";
-                
-                const qTitle = document.createElement("h5");
-                qTitle.innerText = item.q;
-                qTitle.style.fontSize = "0.9rem";
-                qTitle.style.marginBottom = "10px";
-                qTitle.style.color = "#fff";
-                qBox.appendChild(qTitle);
-
-                item.opts.forEach((opt, optIndex) => {
-                    const optLabel = document.createElement("label");
-                    optLabel.style.display = "block";
-                    optLabel.style.fontSize = "0.82rem";
-                    optLabel.style.color = "var(--text-muted)";
-                    optLabel.style.cursor = "pointer";
-                    optLabel.style.marginBottom = "6px";
-                    optLabel.style.direction = "rtl";
-                    optLabel.style.textAlign = "right";
-                    
-                    const radio = document.createElement("input");
-                    radio.type = "radio";
-                    radio.name = `coor_q_${index}`;
-                    radio.value = optIndex;
-                    radio.style.marginLeft = "8px";
-                    
-                    if (optIndex === item.ans) {
-                        optLabel.style.fontWeight = "bold";
-                        optLabel.title = "الإجابة النموذجية المعتمدة باللائحة";
-                    }
-                    
-                    optLabel.appendChild(radio);
-                    optLabel.appendChild(document.createTextNode(opt));
-                    qBox.appendChild(optLabel);
-                });
-                
-                container.appendChild(qBox);
-            });
-        }
-
         const originalCancelInterview = window.cancelInterview;
         window.cancelInterview = function() {
             if(window.interviewTimerInterval) clearInterval(window.interviewTimerInterval);
@@ -432,35 +343,6 @@
                 document.getElementById('interview-form-area').style.display = 'none';
             }
         };
-
-        // ==========================================
-        // أنظمة أمان متطورة لحماية المحتوى ومنع السكرين شوت والطباعة بالكامل
-        // ==========================================
-        
-        // 1. منع زر الفأرة الأيمن بالكامل على الموقع
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-
-        // 2. منع الاختصارات البرمجية المخصصة للحفظ والطباعة وتصوير الشاشة
-        document.addEventListener('keydown', function(e) {
-            // منع Ctrl + C (النسخ)
-            if (e.ctrlKey && e.keyCode == 67) { e.preventDefault(); }
-            // منع Ctrl + S (الحفظ)
-            if (e.ctrlKey && e.keyCode == 83) { e.preventDefault(); }
-            // منع Ctrl + P (الطباعة واقتناص ملفات PDF)
-            if (e.ctrlKey && e.keyCode == 80) { e.preventDefault(); }
-            // منع زر F12 لتأمين الكود
-            if (e.keyCode == 123) { e.preventDefault(); }
-        });
-
-        // 3. كود حماية ذكي يحول الشاشة إلى شاشة سوداء تماماً أثناء محاولة الطباعة أو تصوير الشاشة عبر المتصفح
-        window.addEventListener('beforeprint', function() {
-            document.body.style.display = 'none';
-        });
-        window.addEventListener('afterprint', function() {
-            document.body.style.display = 'block';
-        });
     </script>
 </body>
 </html>
