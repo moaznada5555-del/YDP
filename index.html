@@ -2,417 +2,453 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>منصة YDP | YDP TEAM</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استمارة التسجيل - الوعي في عصر الذكاء الاصطناعي</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #030712;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(43, 86, 255, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(19, 203, 215, 0.1) 0px, transparent 50%);
+            color: #f3f4f6;
+            margin: 0;
+            padding: 20px 10px;
+            min-height: 100vh;
+            display: block;
+        }
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Header */
+        .header-section {
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+            padding-top: 20px;
+        }
+        .logo-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 15px rgba(43, 86, 255, 0.2);
+            overflow: hidden;
+            background: #fff;
+        }
+        .logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(43, 86, 255, 0.2);
+            color: #58a6ff;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            border: 1px solid rgba(43, 86, 255, 0.3);
+        }
+        h1 {
+            font-size: 26px;
+            margin: 0 0 10px 0;
+            background: linear-gradient(135deg, #fff 40%, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+        .subtitle {
+            color: #9ca3af;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Section Divider */
+        .section-title {
+            display: block;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: #38bdf8;
+            margin: 30px 0 20px 0;
+            position: relative;
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #d1d5db;
+            margin-bottom: 8px;
+        }
+        input[type="text"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(31, 41, 55, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.25s ease;
+            text-align: right;
+        }
+        input:focus, select:focus {
+            border-color: #2b56ff;
+            box-shadow: 0 0 10px rgba(43, 86, 255, 0.2);
+            background: rgba(31, 41, 55, 0.9);
+        }
+
+        /* Payment Row */
+        .payment-box {
+            background: rgba(43, 86, 255, 0.05);
+            border: 1px dashed rgba(43, 86, 255, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .price-tag {
+            font-size: 32px;
+            font-weight: 800;
+            color: #38bdf8;
+            margin-bottom: 5px;
+        }
+        .price-desc {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-bottom: 15px;
+        }
+        .payment-methods {
+            display: block;
+            text-align: right;
+            background: rgba(0,0,0,0.2);
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* Upload Button */
+        .file-upload-wrapper {
+            position: relative;
+            margin-top: 15px;
+        }
+        .file-upload-btn {
+            display: block;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            color: #9ca3af;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+        .file-upload-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #38bdf8;
+            color: #fff;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .file-name-preview {
+            font-size: 12px;
+            color: #10b981;
+            margin-top: 5px;
+            text-align: center;
+            display: none;
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #2b56ff, #13cbd7);
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(43, 86, 255, 0.3);
+            transition: all 0.25s ease;
+            margin-top: 20px;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(43, 86, 255, 0.45);
+        }
+        .btn-submit:disabled {
+            background: #4b5563;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Instructions Info */
+        .info-box {
+            background: rgba(245, 158, 11, 0.06);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 25px;
+            font-size: 12px;
+            color: #fbbf24;
+            line-height: 1.6;
+            text-align: right;
+        }
+
+        /* Loading Overlay */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(3, 7, 18, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255,255,255,0.1);
+            border-top-color: #2b56ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .overlay p { margin-top: 20px; font-size: 16px; color: #fff; }
+
+        @media (max-width: 550px) {
+            .header-section { padding-top: 90px; }
+            .logo-box { left: 50%; transform: translateX(-50%); top: 0; width: 80px; height: 80px; }
+            .container { padding: 20px; }
+        }
+    </style>
 </head>
-<body class="dark-theme"> 
-    <div class="top-news-bar">
-        <div class="ticker-text">كيان YDP الموحد - منصة الإدارة والتحكم الذكية لعام 2026 © جميع الحقوق محفوظة</div>
-    </div>
+<body>
 
-    <div id="login-overlay" class="overlay">
-        <div class="login-card">
-            <div class="logo-platform">
-                <img src="https://i.postimg.cc/W4nwLzq2/Whats-App-Image-2026-02-27-at-4-43-50-PM-(1).png" alt="YDP Logo" class="main-logo" style="width: 100px; height: 100px; object-fit: contain; margin-bottom: 15px;">
-                <h2 class="welcome-text">منصة YDP الذكية <span class="highlight">YDP الموحدة</span></h2>
-                <p class="sub-text">نظام الإدارة الرقمي، رصد المقابلات وإصدار الهويات الرقمية لعام 2026</p>
+    <div class="container">
+        <!-- Header -->
+        <div class="header-section">
+            <div class="logo-box">
+                <img src="https://i.postimg.cc/W4nwLzq2/Whats-App-Image-2026-02-27-at-4-43-50-PM-(1).png" alt="لوجو الكيان">
+            </div>
+            <span class="badge">استمارة التسجيل</span>
+            <h1>الوعي في عصر الذكاء الاصطناعي</h1>
+            <p class="subtitle">انضم إلينا في فعاليات تثقيفية ملهمة لاكتشاف كيف يمكننا الاستفادة من الذكاء الاصطناعي بوعي ومسؤولية.</p>
+        </div>
+
+        <form id="registrationForm">
+            
+            <span class="section-title">بيانات التسجيل</span>
+
+            <div class="form-group">
+                <label>الاسم رباعي (باللغة العربية) *</label>
+                <input type="text" id="fullName" placeholder="اكتب اسمك رباعي" required>
             </div>
 
-            <div id="main-options" class="dashboard-router-container">
-                <div class="btn-visitor-router" onclick="guestAccess()">
-                    <div class="visitor-right-side">
-                        <div class="router-icon-circle"><i class="fas fa-eye"></i></div>
-                        <div class="router-text-side">
-                            <h3>بوابة الزوار والأعضاء</h3>
-                            <p>عرض الأنشطة والأخبار العامة للكيان دون صلاحيات تعديل</p>
-                        </div>
-                    </div>
-                    <div class="router-arrow-bottom"><i class="fas fa-chevron-left"></i></div>
+            <div class="form-group">
+                <label>رقم الهاتف (واتساب) *</label>
+                <input type="text" id="phoneNumber" placeholder="اكتب رقم الهاتف" required>
+            </div>
+
+            <div class="form-group">
+                <label>البريد الإلكتروني *</label>
+                <input type="email" id="email" placeholder="اكتب بريدك الإلكتروني" required>
+            </div>
+
+            <div class="form-group">
+                <label>الرقم القومي *</label>
+                <input type="text" id="nationalId" placeholder="اكتب الرقم القومي المكون من 14 رقم" required>
+            </div>
+
+            <div class="form-group">
+                <label>المحافظة *</label>
+                <select id="governorate" required>
+                    <option value="" disabled selected>اختر المحافظة</option>
+                    <option value="القاهرة">القاهرة</option>
+                    <option value="الجيزة">الجيزة</option>
+                    <option value="الإسكندرية">الإسكندرية</option>
+                    <option value="القليوبية">القليوبية</option>
+                    <option value="الشرقية">الشرقية</option>
+                    <option value="المنوفية">المنوفية</option>
+                    <option value="الغربية">الغربية</option>
+                    <option value="الدقهلية">الدقهلية</option>
+                    <option value="البحيرة">البحيرة</option>
+                    <option value="دمياط">دمياط</option>
+                    <option value="بورسعيد">بورسعيد</option>
+                    <option value="الإسماعيلية">الإسماعيلية</option>
+                    <option value="السويس">السويس</option>
+                    <option value="كفر الشيخ">كفر الشيخ</option>
+                    <option value="الفيوم">الفيوم</option>
+                    <option value="بني سويف">بني سويف</option>
+                    <option value="المنيا">المنيا</option>
+                    <option value="أسيوط">أسيوط</option>
+                    <option value="سوهاج">سوهاج</option>
+                    <option value="قنا">قنا</option>
+                    <option value="الأقصر">الأقصر</option>
+                    <option value="أسوان">أسوان</option>
+                    <option value="مطروح">مطروح</option>
+                    <option value="الوادي الجديد">الوادي الجديد</option>
+                    <option value="البحر الأحمر">البحر الأحمر</option>
+                    <option value="شمال سيناء">شمال سيناء</option>
+                    <option value="جنوب سيناء">جنوب سيناء</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>السنة الدراسية *</label>
+                <select id="academicYear" required>
+                    <option value="" disabled selected>اختر السنة الدراسية</option>
+                    <option value="الأولى">الأولى</option>
+                    <option value="الثانية">الثانية</option>
+                    <option value="الثالثة">الثالثة</option>
+                    <option value="الرابعة">الرابعة</option>
+                    <option value="خريج">خريج</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>كلية إيه؟ *</label>
+                <input type="text" id="college" placeholder="اكتب اسم الكلية" required>
+            </div>
+
+            <span class="section-title">رسوم المشاركة وطرق الدفع</span>
+
+            <div class="payment-box">
+                <div class="price-tag">50 جنيه</div>
+                <div class="price-desc">تشمل شهادة معتمدة + هدايا وجيفتات</div>
+                <div class="payment-methods">
+                    📱 <strong>فودافون كاش:</strong> 010XXXXXXXX<br>
+                    💳 <strong>انستا باي:</strong> username@instapay
                 </div>
-
-                <div class="separator-text">أو سجل دخول بصلاحيات الإدارة</div>
-
-                <div class="sections-router-grid">
-                    <div class="section-router-card" onclick="showAccessInput('executive')">
-                        <div class="router-card-img-box"><i class="fas fa-crown"></i></div>
-                        <h4>المكتب التنفيذي</h4>
-                        <p>التحكم والرقابة الكاملة</p>
-                    </div>
-                    <div class="section-router-card" onclick="showAccessInput('committees')">
-                        <div class="router-card-img-box"><i class="fas fa-layer-group"></i></div>
-                        <h4>اللجان المركزية</h4>
-                        <p>إدارة لجان الأمانة العامة</p>
-                    </div>
-                    <div class="section-router-card" onclick="showAccessInput('provinces')">
-                        <div class="router-card-img-box"><i class="fas fa-map-marked-alt"></i></div>
-                        <h4>المحافظات</h4>
-                        <p>رصد لجان الفروع الميدانية</p>
-                    </div>
+                
+                <div class="file-upload-wrapper">
+                    <label class="file-upload-btn" for="receiptFile" id="uploadLabel">
+                        📸 ارفق صورة إيصال التحويل (سكرين شوت) *
+                    </label>
+                    <input type="file" id="receiptFile" accept="image/*" required>
+                    <div class="file-name-preview" id="fileNamePreview">تم اختيار ملف بنجاح</div>
                 </div>
             </div>
 
-            <div id="code-input-area" style="display:none;" class="id-form-container">
-                <div class="or-separator" id="dynamic-login-title">برجاء إدخال كود المصادقة الآمن للوصول</div>
-                <input type="password" id="access-code" placeholder="أدخل الكود السري الآمن المتوافق..." style="text-align: center;">
-                <div style="display: flex; gap: 10px; justify-content: center;">
-                    <button onclick="checkAccess()" class="btn-verify-id">تأكيد الرمز ودخول</button>
-                    <button onclick="backToMain()" class="btn-verify-id" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">عودة</button>
-                </div>
-            </div>
+            <button type="submit" class="btn-submit" id="submitBtn">تسجيل وتأكيد الحجز</button>
+        </form>
+
+        <div class="info-box">
+            • بعد إتمام التسجيل وإرسال البيانات، سيتم إرسال رسالة تأكيد فورا على بريدك الإلكتروني تحتوي على كافة التفاصيل.<br>
+            • سيتم توجيهك مباشرة لجروب الواتساب الرسمي لمتابعة التعليمات الختامية للحضور.
         </div>
     </div>
 
-    <div class="dashboard-layout">
-        <header class="main-header">
-            <div class="nav-container">
-                <div class="logo-area">
-                    <img src="https://i.postimg.cc/W4nwLzq2/Whats-App-Image-2026-02-27-at-4-43-50-PM-(1).png" alt="Logo" style="width: 45px; height: 45px; object-fit: contain; margin-left: 10px; display: block !important;">
-                    <div class="brand-name">
-                        <h2>منصة YDP الإدارية الذكية</h2>
-                        <span id="user-role-display">نطاق الوصول: زائر بالمنصة</span>
-                    </div>
-                </div>
-                <nav>
-                    <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> مغادرة اللوحة</button>
-                </nav>
-            </div>
-        </header>
-
-        <div class="dashboard-body">
-            <aside class="dashboard-sidebar" id="main-sidebar-navigation-zone">
-                <a href="#welcome-section" class="sidebar-link active" onclick="switchActiveLink(this)"><i class="fas fa-chart-pie"></i> <span>الرئيسية</span></a>
-                <a href="#workspace-section" class="sidebar-link" id="nav-work-link" onclick="switchActiveLink(this)"><i class="fas fa-id-card"></i> <span>الكارنيهات الرقمية</span></a>
-                <a href="#interview-section" class="sidebar-link" id="nav-interview-link" onclick="switchActiveLink(this)"><i class="fas fa-user-check"></i> <span>غرفة المقابلات</span></a>
-                <a href="#admin-dashboard-section" class="sidebar-link" id="nav-admin-link" onclick="switchActiveLink(this)"><i class="fas fa-sliders-h"></i> <span>لوحة النشر لايف</span></a>
-            </aside>
-
-            <main class="dashboard-main-content">
-                <section id="welcome-section" class="dashboard-welcome-banner">
-                    <h2>أهلاً بك بـ منصة الإدارة السحابية والتحكم الذكي <span class="highlight">لـ كيان YDP</span></h2>
-                    <p>تابع التقارير، قم بإصدار بطاقات العضوية المشفرة بـ QR Code، وقم بإدارة استمارات المقابلات والتوثيق الحي للأخبار والفعاليات أولاً بأول لعام 2026.</p>
-                </section>
-
-                <div id="executive-structure-zone" style="display: none; margin-bottom: 25px;">
-                    <div class="widget-panel-card">
-                        <div class="widget-header">
-                            <h4><i class="fas fa-sitemap" style="color:#2563eb;"></i> الهيكل القيادي للمكتب التنفيذي لكيان YDP لعام 2026</h4>
-                        </div>
-                        <div class="services-neon-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px;">
-                            <div class="exec-card">
-                                <h4>ا: محمد حازم</h4>
-                                <span>رئيس مجلس الإدارة والمؤسس لكيان YDP</span>
-                            </div>
-                            <div class="exec-card">
-                                <h4>أ. يوسف عبد التواب</h4>
-                                <span>نائب رئيس مجلس ادارة الكيان</span>
-                            </div>
-                            <div class="exec-card">
-                                <h4>أ:سلمي ياسر </h4>
-                                <span>المدير التنفيذي لكيان YDP</span>
-                            </div>
-                            <div class="exec-card">
-                                <h4>أ. منه مدحت</h4>
-                                <span>مساعد المدير التنفيذي شئون اللجان المركزية</span>
-                            </div>
-                            <div class="exec-card">
-                                <h4>أ:إسلام محمد </h4>
-                                <span>مساعد المدير التنفيذي شئون المحافظات</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="widget-panel-card" style="margin-bottom: 25px;">
-                    <div class="widget-header">
-                        <h4><i class="fas fa-layer-group" style="color:#ff8800;"></i> لجان كيان YDP المركزية الثمانية وشرحها الاستراتيجي</h4>
-                    </div>
-                    <div class="services-neon-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; margin-top: 15px;">
-                        <div class="info-card" style="padding: 15px; background: rgba(255,255,255,0.02); border-right: 4px solid #ff8800; border-radius: 8px;">
-                            <h5 style="color: #ff8800; font-size: 1.1rem; margin-bottom: 8px;"><i class="fas fa-wallet"></i> العلاقات المالية (Financial)</h5>
-                            <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5;">إدارة وتخطيط الموارد المالية والتمويل للكيان، وتنظيم الاشتراكات والميزانيات الخاصة بالمشروعات والفعاليات والتحقق من سلامة الأوراق والمستندات المالية.</p>
-                        </div>
-                        <div class="info-card" style="padding: 15px; background: rgba(255,255,255,0.02); border-right: 4px solid #3b82f6; border-radius: 8px;">
-                            <h5 style="color: #3b82f6; font-size: 1.1rem; margin-bottom: 8px;"><i class="fas fa-handshake"></i> العلاقات العامة (PR)</h5>
-                            <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5;">بناء جسور التواصل وتوطيد العلاقات بين الكيان والجهات الخارجية والشركاء، وتأمين الرعايات والبروتوكولات الرسمية والتمثيل الدبلوماسي للكيان.</p>
-                        </div>
-                        <div class="info-card" style="padding: 15px; background: rgba(255,255,255,0.02); border-right: 4px solid #10b981; border-radius: 8px;">
-                            <h5 style="color: #10b981; font-size: 1.1rem; margin-bottom: 8px;"><i class="fas fa-cubes"></i> التنظيم واللوجستيات (Organization)</h5>
-                            <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5;">العمود الفقري لإدارة الفعاليات والمؤتمرات ميدانياً، والمسؤولة عن تنسيق القاعات، وضبط الحركة، وتأمين الدعم اللوجستي اللازم لإنجاح أي نشاط يخص الكيان.</p>
-                        </div>
-                        <div class="info-card" style="padding: 15px; background: rgba(255,255,255,0.02); border-right: 4px solid #a855f7; border-radius: 8px;">
-                            <h5 style="color: #a855f7; font-size: 1.1rem; margin-bottom: 8px;"><i class="fas fa-users-cog"></i> الموارد البشرية (HR)</h5>
-                            <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5;">مسؤولة عن متابعة وتقييم أداء الأعضاء، وحل النزاعات، والفرز والتوظيف، وضمان التزام الأعضاء باللوائح، بالإضافة إلى تعزيز بيئة العمل الإيجابية والمحفزة.</p>
-                        </div>
-                        <div class="info-card" style="padding: 15px; background: rgba(255,255,255,0.02); border-right: 4px solid #ec4899; border-radius: 8px;">
-                            <h5 style="color: #ec4899; font-size: 1.1rem; margin-bottom: 8px;"><i class="fas fa-camera-retro"></i> الميديا والسوشيال ميديا (Media)</h5>
-                            <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5;">الواجهة الإعلامية الرقمية للكيان، وتضم صناعة المحتوى، والتصوير، وتصاميم الجرافيك، والمونتاج، وإدارة الحسابات الرسمية لإبراز هوية YDP ونشر رؤيته.</p>
-                        </div>
-                        <div class="info-card" style="padding: 15px; background: rgba(255,255,255,0.02); border-right: 4px solid #eab308; border-radius: 8px;">
-                            <h5 style="color: #eab308; font-size: 1.1rem; margin-bottom: 8px;"><i class="fas fa-graduation-cap"></i> التدريب والتطوير (Training)</h5>
-                            <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5;">تصميم وإعداد الحقائب التدريبية والورش التأهيلية للأعضاء لرفع كفاءتهم وقدراتهم المهنية، ومتابعة المحاضرين والمادة العلمية المقدمة في شتى المجالات.</p>
-                        </div>
-                        <div class="info-card" style="padding: 15px; background: rgba(255,255,255,0.02); border-right: 4px solid #f97316; border-radius: 8px;">
-                            <h5 style="color: #f97316; font-size: 1.1rem; margin-bottom: 8px;"><i class="fas fa-project-diagram"></i> المشروعات والمبادرات (Projects)</h5>
-                            <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5;">تحويل الأفكار والخطط الاستراتيجية إلى مبادرات واقعية ومشروعات تنموية تخدم المجتمع والشباب، مع دراسة جدواها ووضع آليات التنفيذ المستدامة.</p>
-                        </div>
-                        <div class="info-card" style="padding: 15px; background: rgba(255,255,255,0.02); border-right: 4px solid #06b6d4; border-radius: 8px;">
-                            <h5 style="color: #06b6d4; font-size: 1.1rem; margin-bottom: 8px;"><i class="fas fa-laptop-code"></i> تكنولوجيا المعلومات (IT)</h5>
-                            <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5;">تطوير وصيانة المنصات والمواقع الإلكترونية للكيان، إدارة الأنظمة الرقمية وقواعد البيانات، وتقديم الدعم الفني والتقني وابتكار الحلول الرقمية الذكية.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="services-neon-grid">
-                    <div class="service-neon-card card-orange">
-                        <div class="neon-icon-wrapper"><i class="fas fa-qrcode"></i></div>
-                        <h3>نظام الكارنيهات الذكي</h3>
-                        <p>توليد هوية رقمية معتمدة وموثقة لجميع المقبولين بكيان YDP لعام 2026 في ثوانٍ معدودة وبدقة حوسبية عالية.</p>
-                        <a href="#workspace-section"><button class="btn-neon-action">الانتقال للنظام</button></a>
-                    </div>
-
-                    <div class="service-neon-card card-purple">
-                        <div class="neon-icon-wrapper"><i class="fas fa-poll-h"></i></div>
-                        <h3>منظومة المقابلات الحية</h3>
-                        <p>بنك أسئلة ذكي للتقييم، استمارات فرز اللجان المركزية والمحافظات لايف مع آلية احتساب النسب المئوية تلقائياً.</p>
-                        <a href="#interview-section"><button class="btn-neon-action">فتح غرفة الاستمارات</button></a>
-                    </div>
-
-                    <div class="service-neon-card card-blue">
-                        <div class="neon-icon-wrapper"><i class="fas fa-database"></i></div>
-                        <h3>الربط والمزامنة السحابية</h3>
-                        <p>مزامنة حية ولحظية مع Google Sheets الخاص بالأمانة العامة لرصد وتجميع النتائج إلكترونياً بدون تدخل بشري.</p>
-                        <button class="btn-neon-action" id="drive-zone">ملفات الـ Drive الموحد</button>
-                    </div>
-                </div>
-
-                <section id="workspace-section" class="dashboard-info-panel" style="display:block;">
-                    <div class="widget-header">
-                        <h4><i class="fas fa-id-badge" style="color:#2563eb;"></i> بوابة إصدار وتحميل بطاقات العضوية الرسمية - YDP ID CARD 2026</h4>
-                    </div>
-                    <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 20px; justify-content: center;">
-                        
-                        <div class="id-form-container" style="flex: 1; min-width: 300px; max-width: 500px; text-align: right;">
-                            <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 5px; font-weight: bold;">اسم العضو الثلاثي:</label>
-                            <input type="text" id="id-input-name" placeholder="مثال: أحمد محمد علي" oninput="updateIDCard()">
-
-                            <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 5px; font-weight: bold;">اللجنة أو الأمانة المستهدفة:</label>
-                            <select id="id-input-committee" onchange="updateIDCard()">
-                                <option value="لجنة العلاقات المالية">لجنة العلاقات المالية (Financial)</option>
-                                <option value="لجنة العلاقات العامة">لجنة العلاقات العامة (PR)</option>
-                                <option value="لجنة التنظيم واللوجستيات">لجنة التنظيم واللوجستيات (Organization)</option>
-                                <option value="لجنة الموارد البشرية">لجنة الموارد البشرية (HR)</option>
-                                <option value="لجنة الميديا والسوشيال ميديا">لجنة الميديا والسوشيال ميديا (Media)</option>
-                                <option value="لجنة التدريب والتطوير">لجنة التدريب والتطوير (Training)</option>
-                                <option value="لجنة المشروعات والمبادرات">لجنة المشروعات والمبادرات (Projects)</option>
-                                <option value="لجنة تكنولوجيا المعلومات">لجنة تكنولوجيا المعلومات (IT)</option>
-                            </select>
-
-                            <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 5px; font-weight: bold;">رفع الصورة الشخصية الرسمية:</label>
-                            <input type="file" id="id-input-file" accept="image/*" onchange="loadIDImage(event)" style="padding: 8px;">
-
-                            <button onclick="downloadIDCard()" class="btn-verify-id" style="width: 100%; margin-top: 10px; display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <i class="fas fa-download"></i> تصدير وتحميل الكارنيه المعتمد كصورة PNG
-                            </button>
-                        </div>
-
-                        <div id="id-card-capture-area" style="display:flex; justify-content:center; align-items:center;">
-                            <div class="ydp-digital-id-card" id="ydp-digital-id-card">
-                                <div class="id-card-top-header">
-                                    <img src="https://i.postimg.cc/W4nwLzq2/Whats-App-Image-2026-02-27-at-4-43-50-PM-(1).png" alt="YDP" class="card-top-logo">
-                                    <div class="card-header-titles">
-                                        <h1>برنامج التقييم والتدريب الصيفي 2026</h1>
-                                        <h2>بالتعاون مع بنك الشركة المصرفية العربية الدولية SAIB</h2>
-                                    </div>
-                                </div>
-                                
-                                <div class="id-card-body-content">
-                                    <div class="id-card-photo-frame">
-                                        <img src="https://via.placeholder.com/150" id="card-display-img" alt="Member Photo">
-                                    </div>
-                                    <div class="id-card-user-info-text">
-                                        <h3 id="card-display-name">إسم العضو الثلاثي</h3>
-                                        <p id="card-display-committee">لجنة العلاقات المالية</p>
-                                    </div>
-                                </div>
-                                <div class="id-card-bottom-footer-zone">
-                                    <div id="id-qrcode-box" class="id-qrcode-box"></div>
-                                    <div class="footer-stamp-box-text">
-                                        <span class="stamp-title">كارنيه معتمد وموثق</span>
-                                        <span class="stamp-year">العام التدريبي 2026</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="interview-section" class="dashboard-info-panel" style="display:block;">
-                    <div class="widget-header">
-                        <h4><i class="fas fa-user-check" style="color:#2563eb;"></i> غرف المقابلات الشخصية ورصد درجات الفرز الميداني والمركزي لايف</h4>
-                    </div>
-                    <div id="interview-main-menu" style="display:block; margin-top:15px;">
-                        <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:15px; text-align:right;">اختر اللجنة المستهدفة لإطلاق استمارة المقابلة الشخصية وتفعيل العداد الإلكتروني والبدء في تقييم المرشح فوراً:</p>
-                        <div class="options-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:12px;">
-                            <button class="btn-login" onclick="startInterview('FR')"><i class="fas fa-donate"></i> العلاقات المالية Financial</button>
-                            <button class="btn-login" onclick="startInterview('PR')"><i class="fas fa-handshake"></i> العلاقات العامة PR</button>
-                            <button class="btn-login" onclick="startInterview('Organization')"><i class="fas fa-cubes"></i> التنظيم واللوجستيات</button>
-                            <button class="btn-login" onclick="startInterview('HR')"><i class="fas fa-users-cog"></i> الموارد البشرية HR</button>
-                            <button class="btn-login" onclick="startInterview('Media')"><i class="fas fa-photo-video"></i> السوشيال ميديا Media</button>
-                            <button class="btn-login" onclick="startInterview('Training')"><i class="fas fa-graduation-cap"></i> التدريب والتطوير</button>
-                            <button class="btn-login" onclick="startInterview('Projects')"><i class="fas fa-project-diagram"></i> المشروعات والمبادرات</button>
-                            <button class="btn-login" onclick="startInterview('IT')"><i class="fas fa-laptop-code"></i> تكنولوجيا المعلومات IT</button>
-                            <button class="btn-login" onclick="startInterview('Coordinators')"><i class="fas fa-user-shield"></i> استمارة منسقين اللجان</button>
-                        </div>
-                    </div>
-
-                    <div id="interview-form-area" style="display:none; margin-top:20px; background:rgba(0,0,0,0.2); padding:20px; border-radius:15px; border:1px solid rgba(255,255,255,0.05);">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap: wrap; gap: 10px;">
-                            <div style="text-align: right;">
-                                <h3 id="current-interview-title" style="color:var(--gold-neon); font-family:'Cairo';">نموذج تقييم المرشحين</h3>
-                                <p style="font-size:0.8rem; color:var(--text-muted);" id="live-timer-text">العداد الزمني قيد الاستعداد...</p>
-                            </div>
-                            <button class="btn-verify-id" style="background:#ef4444;" onclick="cancelInterview()">إلغاء وخروج</button>
-                        </div>
-
-                        <div class="id-form-container" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:15px; margin-bottom:20px; text-align:right;">
-                            <div>
-                                <label style="color:var(--text-muted); font-size:0.85rem;">اسم المتقدم للمقابلة:</label>
-                                <input type="text" id="int-name" placeholder="الاسم الثلاثي">
-                            </div>
-                            <div>
-                                <label style="color:var(--text-muted); font-size:0.85rem;">رقم الواتساب:</label>
-                                <input type="text" id="int-phone" placeholder="01xxxxxxxxx">
-                            </div>
-                            <div>
-                                <label style="color:var(--text-muted); font-size:0.85rem;">المحافظة / الجامعة:</label>
-                                <input type="text" id="int-gov" placeholder="الجهة التابع لها">
-                            </div>
-                        </div>
-
-                        <div class="widget-header" style="margin-top:25px; margin-bottom:15px;">
-                            <h4><i class="fas fa-question-circle"></i> بنك الأسئلة المعتمد للتقييم والفرز (30 سؤالاً استراتيجياً)</h4>
-                        </div>
-                        <div id="dynamic-questions-container" style="text-align:right; max-height: 500px; overflow-y: auto; padding-left: 10px; margin-bottom: 25px;">
-                            <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:10px;">[ملحوظة: تم تحديث مصفوفة الأسئلة داخل الكود البرمجي الرئيسي لتعرض 30 سؤالاً مقسماً بدقة تشمل المهارات الشخصية وأسئلة اللجان التخصصية الثمانية].</p>
-                        </div>
-
-                        <div class="widget-header" style="margin-top:20px;">
-                            <h4><i class="fas fa-star-half-alt"></i> التقييم المهاراتي والدرجات المستحقة (من 10 درجات)</h4>
-                        </div>
-                        
-                        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:15px; margin-top:15px; text-align:right;">
-                            <div>
-                                <label style="color:var(--text-muted); font-size:0.85rem;">مهارات التواصل والعرض (10):</label>
-                                <input type="number" id="score-comm" min="0" max="10" value="0" oninput="calcTotalScore()">
-                            </div>
-                            <div>
-                                <label style="color:var(--text-muted); font-size:0.85rem;">الالتزام والمظهر العام (10):</label>
-                                <input type="number" id="score-commit" min="0" max="10" value="0" oninput="calcTotalScore()">
-                            </div>
-                            <div>
-                                <label style="color:var(--text-muted); font-size:0.85rem;">المعرفة التخصصية باللجنة (10):</label>
-                                <input type="number" id="score-tech" min="0" max="10" value="0" oninput="calcTotalScore()">
-                            </div>
-                            <div>
-                                <label style="color:var(--text-muted); font-size:0.85rem;">العمل الجماعي والضغوط (10):</label>
-                                <input type="number" id="score-team" min="0" max="10" value="0" oninput="calcTotalScore()">
-                            </div>
-                        </div>
-
-                        <div style="margin-top:20px; text-align:right; background:rgba(255,255,255,0.02); padding:15px; border-radius:10px;">
-                            <div style="font-size:1.1rem; font-weight:bold; color:white;">النسبة المئوية الإجمالية للمرشح: <span id="total-percentage-display" style="color:var(--gold-neon);">0%</span></div>
-                            <div style="margin-top:10px;">
-                                <label style="color:var(--text-muted); font-size:0.85rem;">ملاحظات وتوصية المقابل الإضافية:</label>
-                                <textarea id="int-notes" rows="3" placeholder="اكتب تقييمك الشامل ونقاط القوة والضعف للمرشح..." class="id-form-container" style="width:100%; background:rgba(0,0,0,0.3); color:white; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px; font-family:'Cairo'; margin-top:5px;"></textarea>
-                            </div>
-                            <div style="margin-top:15px;">
-                                <label style="color:var(--text-muted); font-size:0.85rem; display:block; margin-bottom:5px;">الحالة النهائية الفورية للمرشح:</label>
-                                <select id="int-status" style="width:100%; background:rgba(0,0,0,0.3); color:white; border:1px solid rgba(255,255,255,0.1); padding:10px; border-radius:8px; font-family:'Cairo';">
-                                    <option value="مقبول">مقبول فوراً بالكيان</option>
-                                    <option value="قائمة الانتظار">يُنقل إلى قائمة الانتظار (Waiting List)</option>
-                                    <option value="مرفوض">مرفوض / لم يجتز المعايير</option>
-                                </select>
-                            </div>
-                            <button onclick="submitInterviewForm()" class="btn-verify-id" style="width: 100%; margin-top: 20px; background: var(--gold-gradient); color:#000; font-weight:800; font-size:1rem;">
-                                <i class="fas fa-cloud-upload-alt"></i> ترحيل وحفظ البيانات إلكترونياً لايف بالـ Cloud Sheets
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <div id="admin-dashboard-section" class="dashboard-info-panel" style="display:block;">
-                    <div class="widget-header">
-                        <h4><i class="fas fa-sliders-h" style="color:#ff8800;"></i> لوحة التحكم في النشر البث الحي والأخبار للمسؤولين</h4>
-                    </div>
-                    <div class="two-column-layout" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px; margin-top:20px;">
-                        
-                        <section id="activities-section" class="widget-panel-card">
-                            <div class="widget-header">
-                                <h4><i class="fas fa-bullhorn" style="color:#ff8800;"></i> مركز النشر لايف للفعاليات والأنشطة</h4>
-                            </div>
-                            <div id="admin-controls" style="display:block;">
-                                <textarea id="activity-text" placeholder="ما هي الفعالية أو النشاط الجديد القائم حالياً بالكيان..." class="id-form-container" style="width: 100%; height: 80px; margin-bottom: 10px; color:#fff; padding:10px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; font-family:'Cairo'; resize:none;"></textarea>
-                                <input type="text" id="activity-images" style="color:white; margin-bottom:10px; font-size:0.8rem;" placeholder="روابط الصور التوضيحية (إن وجدت)">
-                                <button onclick="postActivity()" class="btn-verify-id" style="width: 100%;">نشر الفعالية لايف</button>
-                            </div>
-                            <div id="activities-container" style="margin-top:15px;"></div>
-                        </section>
-
-                        <section id="news-section" class="widget-panel-card">
-                            <div class="widget-header">
-                                <h4><i class="fas fa-rss" style="color:#ff8800;"></i> شريط الأخبار العاجلة والنشرات</h4>
-                            </div>
-                            <div id="admin-controls" style="display:block;">
-                                <input type="text" id="news-input" placeholder="اكتب عنوان الخبر العاجل هنا..." class="id-form-container" style="width: 100%; margin-bottom: 10px;">
-                                <button onclick="postNews()" class="btn-verify-id" style="width: 100%;">نشر الخبر بالشريط العلوي</button>
-                            </div>
-                            <div id="news-list" style="margin-top:15px;"></div>
-                        </section>
-
-                    </div>
-                </div>
-            </main>
-        </div>
+    <!-- Loading Overlay -->
+    <div class="overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p id="loadingText">جاري رفع الإيصال وتسجيل بياناتك... يرجى الانتظار</p>
     </div>
 
-    <!-- استدعاء سكريبتات الأنظمة والمكتبات التوافقية بالترتيب الصحيح لعدم تعطيل الأزرار -->
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore-compat.js"></script>
-    <script src="script.js"></script>
     <script>
-        const originalCancelInterview = window.cancelInterview;
-        window.cancelInterview = function() {
-            if(window.interviewTimerInterval) clearInterval(window.interviewTimerInterval);
-            if (typeof originalCancelInterview === 'function') {
-                originalCancelInterview();
-            } else {
-                document.getElementById('interview-main-menu').style.display = 'block';
-                document.getElementById('interview-form-area').style.display = 'none';
+        // الروابط والتوجيهات
+        const scriptUrl = "https://script.google.com/macros/s/AKfycbzGSBKnqERyQJNepL82x7J3Q-5Y_MUdeGuNWCE-0z4ohXKzTHzL1GvHc-QtYs8t9r-DCw/exec";
+        const whatsappGroupUrl = "https://chat.whatsapp.com/LA9Fb6A3RodLp5GdwPP3Wv?s=cl&p=a&ilr=1&amv=2";
+
+        const fileInput = document.getElementById('receiptFile');
+        const uploadLabel = document.getElementById('uploadLabel');
+        const filePreview = document.getElementById('fileNamePreview');
+        const form = document.getElementById('registrationForm');
+        const overlay = document.getElementById('loadingOverlay');
+
+        // عرض اسم الملف عند الاختيار
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                uploadLabel.style.borderColor = '#10b981';
+                uploadLabel.style.color = '#10b981';
+                filePreview.innerText = "📁 تم اختيار الإيصال: " + this.files[0].name;
+                filePreview.style.display = 'block';
             }
-        };
+        });
 
-        // أنظمة أمان متطورة لحماية المحتوى ومنع السكرين شوت والطباعة بالكامل
-        document.addEventListener('contextmenu', function(e) {
+        // إرسال النموذج
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
-        });
+            overlay.style.display = 'flex';
+            document.getElementById('submitBtn').disabled = true;
 
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.keyCode == 67) { e.preventDefault(); }
-            if (e.ctrlKey && e.keyCode == 83) { e.preventDefault(); }
-            if (e.ctrlKey && e.keyCode == 80) { e.preventDefault(); }
-            if (e.keyCode == 123) { e.preventDefault(); }
-        });
+            const file = fileInput.files[0];
+            const reader = new FileReader();
 
-        window.addEventListener('beforeprint', function() {
-            document.body.style.display = 'none';
-        });
-        window.addEventListener('afterprint', function() {
-            document.body.style.display = 'block';
+            reader.onload = function(event) {
+                const base64Data = event.target.result.split(',')[1];
+                const contentType = file.type;
+
+                const formData = {
+                    fullName: document.getElementById('fullName').value,
+                    phoneNumber: document.getElementById('phoneNumber').value,
+                    email: document.getElementById('email').value,
+                    nationalId: document.getElementById('nationalId').value,
+                    governorate: document.getElementById('governorate').value,
+                    academicYear: document.getElementById('academicYear').value,
+                    college: document.getElementById('college').value,
+                    receiptData: base64Data,
+                    receiptType: contentType
+                };
+
+                fetch(scriptUrl, {
+                    method: 'POST',
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status === 'success') {
+                        document.getElementById('loadingText').innerText = "🎉 تم التسجيل بنجاح! جاري تحويلك لجروب الواتساب...";
+                        setTimeout(() => {
+                            window.location.href = whatsappGroupUrl;
+                        }, 1500);
+                    } else {
+                        alert("حدث خطأ أثناء التسجيل: " + result.message);
+                        overlay.style.display = 'none';
+                        document.getElementById('submitBtn').disabled = false;
+                    }
+                })
+                .catch(error => {
+                    alert("عذراً، حدث خطأ في الاتصال بالخادم. حاول مرة أخرى.");
+                    overlay.style.display = 'none';
+                    document.getElementById('submitBtn').disabled = false;
+                });
+            };
+
+            reader.readAsDataURL(file);
         });
     </script>
 </body>
